@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Crypto Donation — Support Video Twimg Tv</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #f6fbff;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent1: #6f57ff;
+      --accent2: #2bb9d9;
+      --accent3: #5b8cff;
+      --radius: 14px;
+      --max-width: 980px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%; margin:0; font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background:linear-gradient(180deg,#f8fcff 0%, #f3fbfd 50%); color:#0f172a; -webkit-font-smoothing:antialiased;}
+    body::before, body::after{content:""; position:fixed; width:480px; height:480px; border-radius:50%; filter:blur(64px); z-index:0; opacity:.18; pointer-events:none;}
+    body::before{left:-180px; top:-120px; background:radial-gradient(circle at 30% 30%, rgba(111,87,255,0.12), rgba(43,185,217,0.02));}
+    body::after{right:-120px; bottom:-90px; background:radial-gradient(circle at 70% 70%, rgba(95,140,255,0.08), rgba(255,160,190,0.02));}
+
+    .container{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+      position:relative;
+      z-index:1;
+    }
+
+    .panel{
+      width:100%;
+      max-width:var(--max-width);
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:start;
+    }
+
+    .about{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow: 0 14px 40px rgba(15,23,42,0.06);
+      border:1px solid rgba(16,24,40,0.03);
+    }
+    .about h3{margin:0 0 8px 0; font-size:18px;}
+    .about p{margin:0 0 16px 0; color:var(--muted);}
+    .supporters{
+      margin-top:14px;
+      padding:18px;
+      border-radius:10px;
+      background:#fbfdff;
+      border:1px solid rgba(15,23,42,0.02);
+      color:var(--muted);
+      min-height:90px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+    }
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow: 0 18px 50px rgba(15,23,42,0.06);
+      border:1px solid rgba(16,24,40,0.03);
+    }
+
+    .card h2{margin:0 0 14px 0; font-size:20px}
+    .muted{color:var(--muted); font-size:14px; margin-bottom:12px;}
+
+    .form-row{display:flex; gap:8px; align-items:center; margin-bottom:12px;}
+    .input{
+      flex:1;
+      background:#f3f6f9;
+      border-radius:10px;
+      padding:12px 14px;
+      border:1px solid rgba(15,23,42,0.03);
+      font-size:15px;
+    }
+    .input.small{padding:10px 12px; font-size:14px}
+
+    .currency-input{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      background:#f3f6f9;
+      padding:6px 8px;
+      border-radius:10px;
+      border:1px solid rgba(15,23,42,0.03);
+    }
+    .currency-input .prefix{
+      background:transparent;
+      color:#0f172a;
+      font-weight:700;
+      padding:0 6px;
+      font-size:15px;
+    }
+    .currency-input input{
+      border:0;
+      background:transparent;
+      outline:none;
+      width:100%;
+      font-size:15px;
+      padding:8px 6px;
+    }
+
+    .quick-btn{background:#fff; border:1px solid rgba(15,23,42,0.06); padding:8px 10px; border-radius:8px; cursor:pointer; font-weight:700; color:#0f172a}
+    .quick-btn:active{transform:translateY(1px)}
+
+    .coins{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:12px 0 18px 0;
+    }
+    .coin{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      padding:8px 12px;
+      border-radius:10px;
+      background:#f7f9fb;
+      cursor:pointer;
+      border:1px solid transparent;
+      user-select:none;
+    }
+    .coin.selected{background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:white; border-color: rgba(0,0,0,0.04); box-shadow:0 6px 18px rgba(15,23,42,0.06);}
+    .coin img{width:22px; height:22px; display:inline-block; border-radius:6px}
+    .coin span{font-weight:700}
+
+    .address-box{display:flex; gap:10px; align-items:center; margin-top:12px; margin-bottom:8px;}
+    .addr{
+      flex:1;
+      padding:10px 12px;
+      border-radius:10px;
+      background:#0b1720;
+      color:#fff;
+      font-family:monospace;
+      font-size:13px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      border:0;
+    }
+    .small-btn{
+      background:linear-gradient(90deg,var(--accent1),var(--accent2));
+      color:#fff;
+      padding:8px 10px;
+      border-radius:8px;
+      border:0;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .meta{display:flex; gap:12px; align-items:center; margin-top:8px; flex-wrap:wrap}
+    .meta .chip{background:#f3f6f9; padding:8px 10px; border-radius:999px; font-weight:600; color:#0f172a; border:1px solid rgba(15,23,42,0.03)}
+
+    .qr-wrap{display:flex; gap:12px; align-items:center; margin-top:14px}
+    .qr{width:140px; height:140px; border-radius:12px; background:#fff; display:flex; align-items:center; justify-content:center; border:1px solid rgba(15,23,42,0.04)}
+    .qr img{max-width:132px; max-height:132px; display:block; border-radius:8px}
+
+    .actions{margin-top:18px; display:flex; gap:10px}
+    .pay-btn{flex:1; background:linear-gradient(90deg,var(--accent3),var(--accent2)); color:white; padding:12px 14px; border-radius:12px; font-weight:800; border:0; cursor:pointer}
+    .explorer-btn{background:#fff; border:1px solid rgba(15,23,42,0.06); padding:10px 12px; border-radius:10px; cursor:pointer}
+
+    .note{margin-top:14px; color:var(--muted); font-size:13px}
+    footer{margin-top:22px; text-align:center; color:var(--muted); font-size:13px}
+
+    .status{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:8px;
+      display:none;
+    }
+    .status.success{background:#ECFDF5;color:#065F46;}
+    .status.error{background:#FEF2F2;color:#991B1B;}
+
+    @media (max-width:980px){
+      .panel{grid-template-columns:1fr; padding:10px;}
+      .qr{width:120px; height:120px}
+      .coins{justify-content:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="panel" role="main" aria-labelledby="pageTitle">
+      <section class="about" aria-labelledby="aboutTitle">
+        <h3 id="aboutTitle">About Video Twimg Tv</h3>
+        <p>Simple & private file and video hosting — support development and server costs via crypto donations.</p>
+
+        <div>
+          <h4 style="margin-top:10px; margin-bottom:8px;">Recent supporters</h4>
+          <div class="supporters" id="supportersList">Be the first to support Video Twimg Tv.</div>
+        </div>
+
+        <div style="margin-top:18px; color:var(--muted); font-size:13px">
+          Tip: After selecting a coin and amount, use your wallet to scan the QR or copy the address.
+        </div>
+      </section>
+
+      <aside class="card" aria-labelledby="payTitle">
+        <h2 id="payTitle">Support Video Twimg Tv</h2>
+        <div class="muted">Choose a crypto and provide supporter details</div>
+
+        <!-- Supporter info -->
+        <div class="form-row" style="margin-top:10px;">
+          <input id="supporterName" class="input small" type="text" placeholder="Your name (optional)" />
+          <input id="supporterEmail" class="input small" type="email" placeholder="Email (optional)" />
+        </div>
+
+        <!-- USD input with $ prefix -->
+        <div class="form-row" style="align-items:stretch;">
+          <div style="flex:1;">
+            <div style="font-size:13px; color:var(--muted); margin-bottom:6px;">Enter amount (USD)</div>
+            <div class="currency-input">
+              <div class="prefix">$</div>
+              <input id="usdAmount" type="number" min="1" step="0.01" value="10" aria-label="USD amount" />
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <button class="quick-btn" data-add="5">+5</button>
+            <button class="quick-btn" data-add="10">+10</button>
+            <button class="quick-btn" data-add="25">+25</button>
+          </div>
+        </div>
+
+        <div class="coins" role="list" aria-label="Select coin">
+          <!-- coins injected here -->
+        </div>
+
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div style="font-weight:700">Receive address</div>
+            <div id="priceInfo" style="color:var(--muted); font-size:13px">Price: —</div>
+          </div>
+
+          <div class="address-box">
+            <input id="addressField" class="addr" readonly aria-label="Wallet address" />
+            <button id="copyAddr" class="small-btn" title="Copy address">Copy</button>
+          </div>
+
+          <div style="margin-top:6px; display:flex; gap:8px; align-items:center;">
+            <div class="chip" id="cryptoAmount" style="padding:10px 12px; border-radius:10px; background:#f3f6f9; font-weight:700">—</div>
+            <div class="chip" id="estFee">Est fee: —</div>
+            <div style="flex:1"></div>
+          </div>
+
+          <div class="qr-wrap">
+            <div class="qr" title="QR code">
+              <img id="qrImg" src="" alt="QR code for payment" />
+            </div>
+            <div style="flex:1">
+              <div style="font-weight:700; margin-bottom:6px">Scan QR or copy address</div>
+              <div style="color:var(--muted); font-size:13px">QR contains payment instructions (address & amount).</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button id="payNow" class="pay-btn">Pay / Copy & Submit</button>
+            <button id="openExplorer" class="explorer-btn">Open in Explorer</button>
+          </div>
+
+          <div id="statusBox" class="status" role="status" aria-live="polite"></div>
+
+          <div class="note">Note: Use the wallet address that matches the network (USDT TRC20 => TRON address T..., USDT ERC20 => ETH 0x..., USDT BEP20 => BSC 0x...)</div>
+          <footer>Please verify addresses before sending funds. Addresses below are configured with the values you provided.</footer>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // ======= CONFIG: addresses provided by user =======
+    const addresses = {
+      ETH: "0xA4cCD862c74278804f24b48aF571faad28dd01B2",          // ETH (ERC20)
+      BNB: "0xA4cCD862c74278804f24b48aF571faad28dd01B2",          // BNB (BEP20)
+      TRX: "TB4wouSMSMgzk3Cfe6L8oUA3USivVgD8dw",                  // TRX (Tron)
+      USDT_TRC20: "TB4wouSMSMgzk3Cfe6L8oUA3USivVgD8dw",           // USDT TRC20 (Tron)
+      USDT_BEP20: "0xA4cCD862c74278804f24b48aF571faad28dd01B2",   // USDT BEP20 (BSC)
+      USDT_ERC20: "0xA4cCD862c74278804f24b48aF571faad28dd01B2"    // USDT ERC20 (Ethereum)
+    };
+
+    // Explorer base URLs
+    const explorers = {
+      ETH: (addr)=>`https://etherscan.io/address/${addr}`,
+      BNB: (addr)=>`https://bscscan.com/address/${addr}`,
+      TRX: (addr)=>`https://tronscan.org/#/address/${addr}`,
+      USDT_TRC20: (addr)=>`https://tronscan.org/#/address/${addr}`,
+      USDT_BEP20: (addr)=>`https://bscscan.com/address/${addr}`,
+      USDT_ERC20: (addr)=>`https://etherscan.io/address/${addr}`
+    };
+
+    // QR images provided by user
+    const providedQRs = {
+      TRC: "https://cdn.aceimg.com/0495703ea.png",    // TRC20 QR
+      BSC: "https://cdn.aceimg.com/f8cf60665.png",    // BSC / BEP20 QR
+      ETH: "https://cdn.aceimg.com/f8cf60665.png"     // ETH/ERC20 QR (user gave same image)
+    };
+
+    // Coins and mapping to CoinGecko IDs
+    const coinList = [
+      { id: "ETH", label:"ETH (ERC20)", symbol:"ETH", cg:"ethereum", addrKey:"ETH", qrType:"ETH" },
+      { id: "BNB", label:"BNB (BEP20)", symbol:"BNB", cg:"binancecoin", addrKey:"BNB", qrType:"BSC" },
+      { id: "TRX", label:"TRX (TRC20)", symbol:"TRX", cg:"tron", addrKey:"TRX", qrType:"TRC" },
+      { id: "USDT_TRC20", label:"USDT (TRC20)", symbol:"USDT", cg:"tether", addrKey:"USDT_TRC20", qrType:"TRC" },
+      { id: "USDT_BEP20", label:"USDT (BEP20)", symbol:"USDT", cg:"tether", addrKey:"USDT_BEP20", qrType:"BSC" },
+      { id: "USDT_ERC20", label:"USDT (ERC20)", symbol:"USDT", cg:"tether", addrKey:"USDT_ERC20", qrType:"ETH" }
+    ];
+
+    // UI elements
+    const coinsWrap = document.querySelector('.coins');
+    const addressField = document.getElementById('addressField');
+    const copyAddrBtn = document.getElementById('copyAddr');
+    const usdInput = document.getElementById('usdAmount');
+    const qrImg = document.getElementById('qrImg');
+    const cryptoAmountEl = document.getElementById('cryptoAmount');
+    const priceInfoEl = document.getElementById('priceInfo');
+    const payNowBtn = document.getElementById('payNow');
+    const openExplorerBtn = document.getElementById('openExplorer');
+    const estFeeEl = document.getElementById('estFee');
+    const supporterNameEl = document.getElementById('supporterName');
+    const supporterEmailEl = document.getElementById('supporterEmail');
+    const statusBox = document.getElementById('statusBox');
+    const supportersList = document.getElementById('supportersList');
+
+    // state
+    let selected = coinList[0].id;
+    let prices = {}; // id -> USD price
+
+    // create coin buttons
+    function renderCoins(){
+      coinsWrap.innerHTML = '';
+      coinList.forEach(c=>{
+        const el = document.createElement('button');
+        el.type = 'button';
+        el.className = 'coin' + (c.id===selected ? ' selected' : '');
+        el.setAttribute('data-id', c.id);
+        el.innerHTML = coinSVG(c.symbol) + `<span style="min-width:110px">${c.label}</span>`;
+        el.addEventListener('click', ()=> {
+          selected = c.id;
+          updateSelected();
+          compute();
+        });
+        coinsWrap.appendChild(el);
+      });
+    }
+
+    // small SVG icons for coins (simple)
+    function coinSVG(sym){
+      return `<div style="width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;margin-right:6px">
+        <img src="data:image/svg+xml;utf8,${encodeURIComponent(simpleIconSVG(sym))}" alt="${sym}" />
+      </div>`;
+    }
+    function simpleIconSVG(sym){
+      const color = {'ETH':'#627EEA','BNB':'#F3BA2F','TRX':'#000000','USDT':'#26A17B'}[sym] || '#888';
+      return `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect rx='6' width='40' height='40' fill='${color}' /><text x='50%' y='55%' font-size='14' fill='white' font-family='Arial' font-weight='700' text-anchor='middle'>${sym.replace(/[^A-Z]/g,'').substring(0,3)}</text></svg>`;
+    }
+
+    // update selected UI + address
+    function updateSelected(){
+      document.querySelectorAll('.coin').forEach(btn=>{
+        btn.classList.toggle('selected', btn.getAttribute('data-id')===selected);
+      });
+      const info = coinList.find(c=>c.id===selected);
+      const addr = addresses[info.addrKey] || 'Not set';
+      addressField.value = addr;
+      estFeeEl.textContent = (info.id.startsWith('USDT') ? 'Network fee depends on chain' : 'Network fee varies');
+    }
+
+    // quick buttons
+    document.querySelectorAll('.quick-btn').forEach(b=>{
+      b.addEventListener('click', ()=> {
+        const add = Number(b.getAttribute('data-add') || 0);
+        usdInput.value = (Number(usdInput.value || 0) + add).toFixed(2);
+        compute();
+      });
+    });
+
+    // copy address
+    copyAddrBtn.addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(addressField.value);
+        copyAddrBtn.textContent = 'Copied ✓';
+        setTimeout(()=> copyAddrBtn.textContent = 'Copy', 1600);
+      }catch(e){
+        alert('Copy failed. Please copy manually.');
+      }
+    });
+
+    // fetch prices from CoinGecko
+    async function fetchPrices(){
+      const ids = [...new Set(coinList.map(c=>c.cg))].join(',');
+      try{
+        const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`);
+        const data = await res.json();
+        coinList.forEach(c=>{
+          prices[c.id] = data[c.cg] ? data[c.cg].usd : null;
+        });
+      }catch(e){
+        console.warn('Price fetch failed', e);
+        coinList.forEach(c=>prices[c.id]=null);
+      }
+    }
+
+    // compute crypto amount and update QR (use provided images when available)
+    function compute(){
+      const usd = Number(usdInput.value || 0);
+      if (!usd || usd <= 0){ cryptoAmountEl.textContent = '—'; priceInfoEl.textContent = 'Price: —'; qrImg.src=''; return; }
+      const price = prices[selected];
+      const coinInfo = coinList.find(c=>c.id===selected);
+      if (!price){
+        priceInfoEl.textContent = 'Price: (unavailable)';
+        cryptoAmountEl.textContent = '—';
+      } else {
+        const amount = usd / price;
+        cryptoAmountEl.textContent = `${amount.toFixed(6)} ${coinInfo.symbol}`;
+        priceInfoEl.textContent = `1 ${coinInfo.symbol} ≈ $${price}`;
+        // QR image selection: if user provided QR for chain, use it. Otherwise, generate a simple QR with Google Charts.
+        const qrType = coinInfo.qrType || null;
+        let qrSrc = '';
+        if (qrType === 'TRC' && providedQRs.TRC) {
+          qrSrc = providedQRs.TRC;
+        } else if (qrType === 'BSC' && providedQRs.BSC) {
+          qrSrc = providedQRs.BSC;
+        } else if (qrType === 'ETH' && providedQRs.ETH) {
+          qrSrc = providedQRs.ETH;
+        } else {
+          const address = addressField.value || '';
+          const qrText = `${coinInfo.symbol} payment\nAddress: ${address}\nAmount: ${amount.toFixed(8)} ${coinInfo.symbol}\nUSD: $${usd}`;
+          qrSrc = `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${encodeURIComponent(qrText)}`;
+        }
+        qrImg.src = qrSrc;
+      }
+    }
+
+    // submit & copy: post to PHP endpoint, include name/email
+    payNowBtn.addEventListener('click', async ()=>{
+      const usd = Number(usdInput.value || 0);
+      if (!usd || usd <= 0){ showStatus('Please enter a valid USD amount.', 'error'); return; }
+      const addr = addressField.value || '';
+      if (!addr){ showStatus('Address not available.', 'error'); return; }
+      const name = (supporterNameEl.value || '').trim();
+      const email = (supporterEmailEl.value || '').trim();
+      const coinInfo = coinList.find(c=>c.id===selected);
+      const details = {
+        name: name || '(anonymous)',
+        email: email || '',
+        usd_amount: Number(usd).toFixed(2),
+        crypto_amount: cryptoAmountEl.textContent,
+        network: selected,
+        address: addr,
+        timestamp: new Date().toISOString()
+      };
+
+      // copy to clipboard (friendly instruction)
+      try{
+        const clipped = `${details.name}\n${details.email || ''}\nAmount: $${details.usd_amount}\n${details.crypto_amount}\nSend to: ${details.address}\nNetwork: ${details.network}`;
+        await navigator.clipboard.writeText(clipped);
+      }catch(e){
+        // ignore clipboard errors; proceed to submit
+      }
+
+      // POST to server
+      try{
+        const res = await fetch('save_donation.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(details)
+        });
+        const json = await res.json();
+        if (json && json.success) {
+          showStatus('Donation instruction saved. Thank you!', 'success');
+          appendSupporter(details.name, details.usd_amount, details.network);
+        } else {
+          showStatus((json && json.message) ? json.message : 'Server error while saving.', 'error');
+        }
+      }catch(err){
+        showStatus('Network error: could not submit. ' + (err.message || ''), 'error');
+      }
+    });
+
+    function appendSupporter(name, usd, network){
+      const item = document.createElement('div');
+      item.style.marginTop = '8px';
+      item.style.textAlign = 'center';
+      item.innerHTML = `<strong>${escapeHtml(name || '(anonymous)')}</strong> — $${escapeHtml(Number(usd).toFixed(2))} <span style="color:var(--muted)">(${escapeHtml(network)})</span>`;
+      // replace initial message if it's the default
+      if (supportersList.innerText.trim().startsWith('Be the first')) supportersList.innerHTML = '';
+      supportersList.prepend(item);
+    }
+
+    function showStatus(msg, type){
+      statusBox.textContent = msg;
+      statusBox.className = 'status ' + (type==='success' ? 'success' : 'error');
+      statusBox.style.display = 'block';
+      if (type === 'success') {
+        setTimeout(()=>{ statusBox.style.display='none'; }, 4000);
+      }
+    }
+
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; }); }
+
+    openExplorerBtn.addEventListener('click', ()=>{
+      const info = coinList.find(c=>c.id===selected);
+      const addr = addressField.value || '';
+      if (!addr){ showStatus('Address not available', 'error'); return; }
+      const url = explorers[selected] ? explorers[selected](addr) : null;
+      if (url) window.open(url, '_blank', 'noopener');
+      else showStatus('Explorer is not available for this network.', 'error');
+    });
+
+    // recalc when usd input or selected change
+    usdInput.addEventListener('input', ()=> compute());
+
+    // initial setup
+    (async function init(){
+      renderCoins();
+      await fetchPrices();
+      updateSelected();
+      compute();
+      // refresh prices periodically
+      setInterval(async ()=>{ await fetchPrices(); compute(); }, 60000);
+      // try load recent supporters (optional)
+      try {
+        const res = await fetch('donations.json', {cache: 'no-store'});
+        if (res.ok) {
+          const list = await res.json();
+          if (Array.isArray(list) && list.length) {
+            supportersList.innerHTML = '';
+            list.slice(-6).reverse().forEach(s => {
+              appendSupporter(s.name || '(anonymous)', s.usd_amount || '0.00', s.network || '');
+            });
+          }
+        }
+      }catch(e){}
+    })();
+
+    // supporting functions (same as earlier)
+    function renderCoins(){
+      coinsWrap.innerHTML = '';
+      coinList.forEach(c=>{
+        const el = document.createElement('button');
+        el.type = 'button';
+        el.className = 'coin' + (c.id===selected ? ' selected' : '');
+        el.setAttribute('data-id', c.id);
+        el.innerHTML = coinSVG(c.symbol) + `<span style="min-width:110px">${c.label}</span>`;
+        el.addEventListener('click', ()=> {
+          selected = c.id;
+          updateSelected();
+          compute();
+        });
+        coinsWrap.appendChild(el);
+      });
+    }
+    function coinSVG(sym){
+      return `<div style="width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;margin-right:6px">
+        <img src="data:image/svg+xml;utf8,${encodeURIComponent(simpleIconSVG(sym))}" alt="${sym}" />
+      </div>`;
+    }
+    function simpleIconSVG(sym){
+      const color = {'ETH':'#627EEA','BNB':'#F3BA2F','TRX':'#000000','USDT':'#26A17B'}[sym] || '#888';
+      return `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect rx='6' width='40' height='40' fill='${color}' /><text x='50%' y='55%' font-size='14' fill='white' font-family='Arial' font-weight='700' text-anchor='middle'>${sym.replace(/[^A-Z]/g,'').substring(0,3)}</text></svg>`;
+    }
+
+    // updateSelected (already defined above earlier; kept here to ensure reference)
+    function updateSelected(){
+      document.querySelectorAll('.coin').forEach(btn=>{
+        btn.classList.toggle('selected', btn.getAttribute('data-id')===selected);
+      });
+      const info = coinList.find(c=>c.id===selected);
+      const addr = addresses[info.addrKey] || 'Not set';
+      addressField.value = addr;
+      estFeeEl.textContent = (info.id.startsWith('USDT') ? 'Network fee depends on chain' : 'Network fee varies');
+    }
+
+    // fetchPrices and compute defined earlier (kept)
+    async function fetchPrices(){
+      const ids = [...new Set(coinList.map(c=>c.cg))].join(',');
+      try{
+        const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd`);
+        const data = await res.json();
+        coinList.forEach(c=>{
+          prices[c.id] = data[c.cg] ? data[c.cg].usd : null;
+        });
+      }catch(e){
+        console.warn('Price fetch failed', e);
+        coinList.forEach(c=>prices[c.id]=null);
+      }
+    }
+    function compute(){
+      const usd = Number(usdInput.value || 0);
+      if (!usd || usd <= 0){ cryptoAmountEl.textContent = '—'; priceInfoEl.textContent = 'Price: —'; qrImg.src=''; return; }
+      const price = prices[selected];
+      const coinInfo = coinList.find(c=>c.id===selected);
+      if (!price){
+        priceInfoEl.textContent = 'Price: (unavailable)';
+        cryptoAmountEl.textContent = '—';
+      } else {
+        const amount = usd / price;
+        cryptoAmountEl.textContent = `${amount.toFixed(6)} ${coinInfo.symbol}`;
+        priceInfoEl.textContent = `1 ${coinInfo.symbol} ≈ $${price}`;
+        const qrType = coinInfo.qrType || null;
+        let qrSrc = '';
+        if (qrType === 'TRC' && providedQRs.TRC) {
+          qrSrc = providedQRs.TRC;
+        } else if (qrType === 'BSC' && providedQRs.BSC) {
+          qrSrc = providedQRs.BSC;
+        } else if (qrType === 'ETH' && providedQRs.ETH) {
+          qrSrc = providedQRs.ETH;
+        } else {
+          const address = addressField.value || '';
+          const qrText = `${coinInfo.symbol} payment\nAddress: ${address}\nAmount: ${amount.toFixed(8)} ${coinInfo.symbol}\nUSD: $${usd}`;
+          qrSrc = `https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${encodeURIComponent(qrText)}`;
+        }
+        qrImg.src = qrSrc;
+      }
+    }
+  </script>
+</body>
+</html>
