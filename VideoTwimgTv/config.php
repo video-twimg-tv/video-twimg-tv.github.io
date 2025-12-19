@@ -25,8 +25,8 @@ $admin_password_hash = password_hash('change_this_password', PASSWORD_DEFAULT); 
 
 // Email notification settings
 $notify_email_enabled = false; // set true to enable mail notifications
-$notify_email_to = 'you@domain.tld';
-$notify_email_from = 'noreply@yourdomain.tld';
+$notify_email_to = 'akunmonja1@gmail.com';
+$notify_email_from = 'akunmonja1@gmail.com';
 $notify_email_subject = 'New crypto donation received';
 
 // If you prefer SMTP / PHPMailer, you can integrate it in save_donation.php
