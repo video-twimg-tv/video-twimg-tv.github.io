@@ -1,7 +1,7 @@
 <?php
-// admin.php - simple password-protected admin UI to view donations
+// admin.html - simple password-protected admin UI to view donations
 session_start();
-require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/config.html';
 
 $logged_in = isset($_SESSION['admin_logged']) && $_SESSION['admin_logged'] === true;
 
@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     $pass = $_POST['password'] ?? '';
     if ($user === $admin_user && password_verify($pass, $admin_password_hash)) {
         $_SESSION['admin_logged'] = true;
-        header('Location: admin.php');
+        header('Location: admin.html');
         exit;
     } else {
         $error = 'Invalid credentials';
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     session_unset();
     session_destroy();
-    header('Location: admin.php');
+    header('Location: admin.html');
     exit;
 }
 
@@ -92,7 +92,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#0f172a;pad
   <div class="header">
     <h1>Donations Admin — Video Twimg Tv</h1>
     <?php if ($logged_in): ?>
-      <div><a href="admin.php?action=logout">Logout</a></div>
+      <div><a href="admin.html?action=logout">Logout</a></div>
     <?php endif; ?>
   </div>
 
@@ -100,7 +100,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#0f172a;pad
   <div class="login-box">
     <h3>Admin Login</h3>
     <?php if (!empty($error)): ?><div class="notice"><?=htmlspecialchars($error)?></div><?php endif; ?>
-    <form method="post" action="admin.php">
+    <form method="post" action="admin.html">
       <input type="hidden" name="action" value="login" />
       <div><label>Username<br><input type="text" name="username" required style="width:100%;padding:8px;margin-top:6px"></label></div>
       <div style="margin-top:8px"><label>Password<br><input type="password" name="password" required style="width:100%;padding:8px;margin-top:6px"></label></div>
@@ -109,7 +109,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#0f172a;pad
   </div>
 <?php else: ?>
   <div>
-    <form method="get" action="admin.php" class="search">
+    <form method="get" action="admin.html" class="search">
       <input type="text" name="q" placeholder="Search name, email, address, network" value="<?=htmlspecialchars($search)?>" style="width:60%;padding:8px" />
       <button type="submit" style="padding:8px 12px">Search</button>
     </form>
@@ -145,7 +145,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#0f172a;pad
           if ($i === $page) echo "<strong>$i</strong> ";
           else {
             $q = $search ? '&q=' . urlencode($search) : '';
-            echo "<a href=\"admin.php?page={$i}{$q}\">{$i}</a> ";
+            echo "<a href=\"admin.html?page={$i}{$q}\">{$i}</a> ";
           }
         }
       ?>
