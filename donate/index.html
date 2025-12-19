@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Support — Damn.video</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  
+<style>
+:root{
+  --bg: #f7fbfd;
+  --card: rgba(255,255,255,0.7);
+  --glass: rgba(10,14,20,0.45);
+  --accent1: #06b6d4; /* teal */
+  --accent2: #ec4899; /* magenta */
+  --text: #0f172a;
+  --muted: #64748b;
+  --radius: 12px;
+  --container-w: 980px;
+  --shadow-1: 0 6px 20px rgba(12,18,37,0.08);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(circle at 10% 10%, rgba(6,182,212,0.06), transparent 10%),
+              radial-gradient(circle at 95% 80%, rgba(236,72,153,0.04), transparent 10%),
+              var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* Container */
+.container{
+  width: min(92%, var(--container-w));
+  margin: 0 auto;
+}
+
+/* Header */
+.site-header{padding:18px 0}
+.header-inner{display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;gap:14px;align-items:center}
+.logo-mark{
+  width:56px;height:56px;border-radius:12px;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  display:inline-flex;align-items:center;justify-content:center;
+  color:white;font-weight:700;font-family:"Montserrat",sans-serif;
+  box-shadow: var(--shadow-1);
+}
+.site-title{margin:0;font-size:18px;line-height:1}
+.site-sub{margin:0;color:var(--muted);font-size:13px;}
+
+/* Layout */
+.main-grid{
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap:28px;
+  align-items:start;
+  padding:28px 0 56px;
+}
+
+/* Cards */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+  border-radius:var(--radius);
+  padding:28px;
+  box-shadow: var(--shadow-1);
+}
+.card-glass{
+  margin-top:18px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.35));
+  backdrop-filter: blur(6px);
+  border-radius:10px;
+  padding:18px;
+}
+
+/* Hero */
+.hero-title{
+  font-family:"Montserrat",sans-serif;
+  font-size:28px;margin:0 0 8px;
+  background:linear-gradient(90deg,var(--accent2),var(--accent1));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-lead{color:var(--muted);margin:0 0 12px;line-height:1.6}
+
+/* Reasons */
+.reasons{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:10px}
+.reasons li{padding-left:6px;color:var(--text)}
+
+/* CTA Buttons */
+.ctas{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.btn{
+  display:inline-block;text-align:center;padding:14px 18px;border-radius:10px;font-weight:600;text-decoration:none;color:white;
+  transition:transform .14s ease, box-shadow .14s ease;
+}
+.btn-primary{
+  background: linear-gradient(90deg,var(--accent2),var(--accent1));
+  box-shadow: 0 6px 18px rgba(236,72,153,0.14);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(6,182,212,0.12)}
+.btn-secondary{
+  background: linear-gradient(90deg,#2563eb,#06b6d4);
+  box-shadow: 0 6px 18px rgba(37,99,235,0.12);
+}
+.btn-outline{
+  background:transparent;color:var(--text);border:1px solid rgba(15,23,42,0.06);
+  box-shadow:none;
+}
+
+/* Manual donate */
+.manual-donate{margin-top:18px}
+.manual-donate h4{margin:0 0 6px;font-size:16px}
+.muted{color:var(--muted);font-size:14px}
+.email-row{display:flex;gap:10px;align-items:center;margin-top:10px}
+.email-row code{
+  background:#0b1220;color:#f8fafc;padding:10px 14px;border-radius:8px;font-weight:600;
+  user-select:text;
+}
+.copy-btn{
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  border:none;color:white;padding:10px 12px;border-radius:8px;cursor:pointer;font-weight:600;
+}
+.copy-msg{margin-top:8px;color:var(--accent1);font-size:13px;height:18px}
+
+/* Visual aside */
+.visual{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;min-height:360px}
+.visual-inner{width:100%;height:280px;border-radius:12px;overflow:hidden}
+.visual-note{margin-top:12px;color:var(--muted);font-size:13px;}
+
+/* Footer */
+.site-footer{padding:18px 0;border-top:1px solid rgba(12,18,37,0.04);color:var(--muted);font-size:13px;text-align:center}
+
+/* Responsive */
+@media (max-width:980px){
+  .main-grid{grid-template-columns:1fr;padding:16px 0}
+  .visual{order:-1}
+  .visual-inner{height:200px}
+}
+</style>  
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <span class="logo-mark">VT</span>
+        <div>
+          <h1 class="site-title">Support Video Twimg Tv</h1>
+          <p class="site-sub">Keep the project fast, private, and ad-light.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container main-grid">
+    <section class="hero card">
+      <h2 class="hero-title">We appreciate your support</h2>
+      <p class="hero-lead">
+        Hey! We get it — life’s got bills, and so do we. Running Damn.video isn’t free (shocking, we know). Servers, bandwidth, and keeping things smooth behind the scenes adds up to around $80–$100 a month — basically a nice dinner out or those earbuds still in your cart.
+      <br>
+      <br>   
+        If you like what we’re doing and want to help keep Damn.video fast, free, and privacy-focused, consider buying us a virtual coffee ☕. Every bit helps!
+      <div class="why card-glass">
+        <h3>Your Support Helps Us:</h3>
+        <ul class="reasons">
+          <li>🚀 Keep high-performance servers humming</li>
+          <li>🛠 ️Improve and maintain features you lovei</li>
+          <li>☕ Power those late-night code-fix marathons</li>
+          <li>🔒 Keep the platform private and ad-light</li>
+        </ul>
+      </div>
+
+      <div class="ctas">
+      <a class="btn btn-primary" href="VideoTwimgTv" role="button">Buy Us a Coffee ☕</a>
+  <footer class="site-footer">
+    <div class="container">
+      <p>© VideoTwimgTv · Built with ♥ • <small class="muted">Thank you for supporting indie projects.</small></p>
+    </div>
+  </footer>
+      </div>
+    </section>
+  </main>
+
+
+ <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const copyBtn = document.getElementById('copy-btn');
+  const emailEl = document.getElementById('donate-email');
+  const msgEl = document.getElementById('copy-msg');
+
+  if (!copyBtn || !emailEl) return;
+
+  copyBtn.addEventListener('click', async () => {
+    const text = emailEl.textContent.trim();
+    try {
+      await navigator.clipboard.writeText(text);
+      msgEl.textContent = 'Email disalin ke clipboard ✅';
+      setTimeout(() => msgEl.textContent = '', 2500);
+    } catch (err) {
+      msgEl.textContent = 'Gagal menyalin — silakan salin manual.';
+      setTimeout(() => msgEl.textContent = '', 3000);
+    }
+  });
+});     
+ </script>
+</body>
+</html>
