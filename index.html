@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title> Video-twimg-tv —  Lifestyle </title>
+  <meta name="description" content="Mobile-first gallery with 30 video picks, large thumbnails & clean UI inspired by damn.video." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <style>
+    /* MOBILE-FIRST, clean & bold (inspired by damn.video) */
+    :root{
+      --bg:#06050a;
+      --card:#0d0b10;
+      --muted:rgba(255,255,255,0.75);
+      --accent1:#ff6f98;
+      --accent2:#ffd07a;
+      --glass: rgba(255,255,255,0.03);
+      --glass-border: rgba(255,255,255,0.04);
+      --gap:12px;
+      --utility-height:42px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      background: linear-gradient(180deg,#05040a 0%, #0a0610 100%);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      padding:14px;
+      -webkit-tap-highlight-color: transparent;
+      /* leave space for utility bar */
+      padding-top: calc(14px + var(--utility-height));
+    }
+
+    /* TOP UTILITY BAR (centered links like the screenshot) */
+    .utility-bar {
+      position:fixed;
+      left:0;
+      right:0;
+      top:0;
+      height:var(--utility-height);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#000; /* pure black like screenshot */
+      z-index:120;
+      border-bottom:1px solid rgba(255,255,255,0.02);
+      font-size:13px;
+      letter-spacing:0.02em;
+    }
+    .utility-bar a {
+      color: #ffffff;
+      text-decoration:none;
+      margin:0 8px;
+      opacity:0.95;
+    }
+    .utility-bar a.donate {
+      color: #ffccd7; /* soft pink to stand out */
+      font-weight:700;
+    }
+    .utility-bar .sep { color: rgba(255,255,255,0.18); margin: 0 8px; }
+
+    /* header minimalist */
+    header.top {
+      display:flex; align-items:center; gap:12px; margin-bottom:10px;
+      position:sticky; top:calc(var(--utility-height) + 6px); z-index:50;
+      background: linear-gradient(180deg, rgba(6,5,10,0.9), rgba(6,5,10,0.6));
+      padding:10px 12px; border-radius:10px;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .brand { display:flex; gap:10px; align-items:center; }
+    .logo { width:44px; height:44px; border-radius:10px; background:linear-gradient(135deg,var(--accent1),var(--accent2)); display:flex;align-items:center;justify-content:center;color:#111;font-weight:700;font-family:Playfair Display,serif; }
+    .title { font-weight:700; font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+    .small { color:var(--muted); font-size:12px }
+
+    .actions { margin-left:auto; display:flex; gap:8px; align-items:center; }
+
+    .search {
+      height:40px; border-radius:10px; padding:0 12px; border:1px solid var(--glass-border);
+      background: rgba(255,255,255,0.02); color:var(--muted); outline:none; font-size:14px;
+    }
+    .btn {
+      padding:8px 10px; border-radius:10px; background:transparent; border:1px solid var(--glass-border); color:var(--muted); font-weight:600;
+    }
+
+    /* list of big cards — full-bleed feel on mobile */
+    .list { display:flex; flex-direction:column; gap:14px; padding-bottom:140px; }
+
+    .card {
+      display:block;
+      border-radius:14px;
+      overflow:hidden;
+      position:relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+      border:1px solid var(--glass-border);
+      cursor:pointer;
+      -webkit-tap-highlight-color:transparent;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .thumb {
+      width:100%;
+      height:200px;
+      background:#111;
+      display:block;
+      position:relative;
+    }
+    .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* overlays */
+    .overlay {
+      position:absolute; left:0; right:0; bottom:0; padding:12px 14px;
+      display:flex; align-items:center; justify-content:space-between;
+      background: linear-gradient(180deg, rgba(0,0,0,0.00), rgba(0,0,0,0.55));
+      gap:12px;
+    }
+    .meta-left { display:flex; flex-direction:column; gap:4px; min-width:0; }
+    .meta-title { font-weight:700; font-size:15px; margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .meta-sub { color:var(--muted); font-size:12px; }
+
+    .meta-right { display:flex; gap:8px; align-items:center; flex-shrink:0; }
+    .duration {
+      background: rgba(0,0,0,0.5); padding:6px 8px; border-radius:8px; font-weight:700; color:#fff; font-size:12px;
+    }
+    .play-pill {
+      background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:#111; padding:8px 10px; border-radius:999px; font-weight:800; font-size:13px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* read more / prev buttons area */
+    .pager-wrap { display:flex; justify-content:center; gap:12px; margin-top:18px; margin-bottom:40px; }
+    .pager-btn {
+      padding:12px 20px; border-radius:999px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:#111; font-weight:800; border:none; box-shadow:0 14px 40px rgba(0,0,0,0.5); cursor:pointer;
+    }
+    .pager-btn.secondary { background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted); box-shadow:none; }
+
+    /* grid on wider screens */
+    @media(min-width:720px){
+      body{ padding:20px 36px; padding-top: calc(20px + var(--utility-height)); }
+      .list { display:grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap:18px; padding-bottom:80px; }
+      .thumb{ height:180px; }
+      .pager-wrap { justify-content:center; }
+    }
+
+    footer { text-align:center; color:var(--muted); font-size:13px; margin-top:14px; padding-bottom:24px; }
+  </style>
+</head>
+<body>
+  <!-- Utility bar centered (replaces the previous donate sheet design) -->
+  <div class="utility-bar" role="navigation" aria-label="Utility links">
+    <a href="#" id="reportAbuse">Report Abuse</a>
+    <span class="sep">|</span>
+    <a href="#" class="donate" id="topDonate">Donate! ❤️</a>
+    <span class="sep">|</span>
+    <a href="#" id="advertise">Advertise</a>
+    <span class="sep">|</span>
+    <a href="#" id="terms">Terms of Service (Rules!)</a>
+    <span class="sep">|</span>
+  </div>
+
+  <header class="top" role="banner" aria-label="Header">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">VT</div>
+      <div>
+        <div class="title">Educational Video Collection</div>
+        <div class="small">News & Lifestyle</div>
+      </div>
+    </div>
+
+    <div class="actions" role="search">
+      <input id="search" class="search" placeholder="Search title or number..." aria-label="Search videos" />
+      <button id="shuffle" class="btn" title="Shuffle">Shuffle</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="list" class="list" aria-live="polite" aria-label="Video list">
+      <!-- generated by JS -->
+    </section>
+
+    <div class="pager-wrap" aria-hidden="false">
+      <button id="prevBtn" class="pager-btn secondary" style="display:none" aria-hidden="true">Previous</button>
+      <button id="readMoreBtn" class="pager-btn" aria-pressed="false">Read more</button>
+    </div>
+  </main>
+
+  <footer>© amplify-video-tv <span id="year"></span></footer>
+
+  <script>
+  (function(){
+    // initial 30 video entries (provided)
+    const initialVideos = [
+      {"id":1,"title":"AxBpnxJ41.mp4","thumb":"https://cdn.aceimg.com/a5a7c0162.jpg","thumb2x":"https://cdn.aceimg.com/a5a7c0162.jpg","url":"https://amplify-video-tv.github.io/AxBpnxJ41.mp4","duration":"2:37"},
+      {"id":2,"title":"Video 02","thumb":"https://picsum.photos/seed/dv02/900/600","thumb2x":"https://picsum.photos/seed/dv02/1200/800","url":"https://amplify-video-tv.github.io/02","duration":"02:09"},
+      {"id":3,"title":"Video 03","thumb":"https://picsum.photos/seed/dv03/900/600","thumb2x":"https://picsum.photos/seed/dv03/1200/800","url":"https://amplify-video-tv.github.io/03","duration":"04:12"},
+      {"id":4,"title":"Video 04","thumb":"https://picsum.photos/seed/dv04/900/600","thumb2x":"https://picsum.photos/seed/dv04/1200/800","url":"https://amplify-video-tv.github.io/04","duration":"01:58"},
+      {"id":5,"title":"Video 05","thumb":"https://picsum.photos/seed/dv05/900/600","thumb2x":"https://picsum.photos/seed/dv05/1200/800","url":"https://amplify-video-tv.github.io/05","duration":"05:03"},
+      {"id":6,"title":"Video 06","thumb":"https://picsum.photos/seed/dv06/900/600","thumb2x":"https://picsum.photos/seed/dv06/1200/800","url":"https://amplify-video-tv.github.io/06","duration":"02:45"},
+      {"id":7,"title":"Video 07","thumb":"https://picsum.photos/seed/dv07/900/600","thumb2x":"https://picsum.photos/seed/dv07/1200/800","url":"https://amplify-video-tv.github.io/07","duration":"03:34"},
+      {"id":8,"title":"Video 08","thumb":"https://picsum.photos/seed/dv08/900/600","thumb2x":"https://picsum.photos/seed/dv08/1200/800","url":"https://amplify-video-tv.github.io/08","duration":"02:26"},
+      {"id":9,"title":"Video 09","thumb":"https://picsum.photos/seed/dv09/900/600","thumb2x":"https://picsum.photos/seed/dv09/1200/800","url":"https://amplify-video-tv.github.io/09","duration":"04:44"},
+      {"id":10,"title":"Video 10","thumb":"https://picsum.photos/seed/dv10/900/600","thumb2x":"https://picsum.photos/seed/dv10/1200/800","url":"https://amplify-video-tv.github.io/10","duration":"03:10"},
+      {"id":11,"title":"Video 11","thumb":"https://picsum.photos/seed/dv11/900/600","thumb2x":"https://picsum.photos/seed/dv11/1200/800","url":"https://amplify-video-tv.github.io/11","duration":"02:55"},
+      {"id":12,"title":"Video 12","thumb":"https://picsum.photos/seed/dv12/900/600","thumb2x":"https://picsum.photos/seed/dv12/1200/800","url":"https://amplify-video-tv.github.io/12","duration":"01:42"},
+      {"id":13,"title":"Video 13","thumb":"https://picsum.photos/seed/dv13/900/600","thumb2x":"https://picsum.photos/seed/dv13/1200/800","url":"https://amplify-video-tv.github.io/13","duration":"06:01"},
+      {"id":14,"title":"Video 14","thumb":"https://picsum.photos/seed/dv14/900/600","thumb2x":"https://picsum.photos/seed/dv14/1200/800","url":"https://amplify-video-tv.github.io/14","duration":"02:20"},
+      {"id":15,"title":"Video 15","thumb":"https://picsum.photos/seed/dv15/900/600","thumb2x":"https://picsum.photos/seed/dv15/1200/800","url":"https://amplify-video-tv.github.io/15","duration":"03:05"},
+      {"id":16,"title":"Video 16","thumb":"https://picsum.photos/seed/dv16/900/600","thumb2x":"https://picsum.photos/seed/dv16/1200/800","url":"https://amplify-video-tv.github.io/16","duration":"02:48"},
+      {"id":17,"title":"Video 17","thumb":"https://picsum.photos/seed/dv17/900/600","thumb2x":"https://picsum.photos/seed/dv17/1200/800","url":"https://amplify-video-tv.github.io/17","duration":"03:30"},
+      {"id":18,"title":"Video 18","thumb":"https://picsum.photos/seed/dv18/900/600","thumb2x":"https://picsum.photos/seed/dv18/1200/800","url":"https://amplify-video-tv.github.io/18","duration":"04:00"},
+      {"id":19,"title":"Video 19","thumb":"https://picsum.photos/seed/dv19/900/600","thumb2x":"https://picsum.photos/seed/dv19/1200/800","url":"https://amplify-video-tv.github.io/19","duration":"02:12"},
+      {"id":20,"title":"Video 20","thumb":"https://picsum.photos/seed/dv20/900/600","thumb2x":"https://picsum.photos/seed/dv20/1200/800","url":"https://amplify-video-tv.github.io/20","duration":"05:20"},
+      {"id":21,"title":"Video 21","thumb":"https://picsum.photos/seed/dv21/900/600","thumb2x":"https://picsum.photos/seed/dv21/1200/800","url":"https://amplify-video-tv.github.io/21","duration":"03:18"},
+      {"id":22,"title":"Video 22","thumb":"https://picsum.photos/seed/dv22/900/600","thumb2x":"https://picsum.photos/seed/dv22/1200/800","url":"https://amplify-video-tv.github.io/22","duration":"02:37"},
+      {"id":23,"title":"Video 23","thumb":"https://picsum.photos/seed/dv23/900/600","thumb2x":"https://picsum.photos/seed/dv23/1200/800","url":"https://amplify-video-tv.github.io/23","duration":"04:09"},
+      {"id":24,"title":"Video 24","thumb":"https://picsum.photos/seed/dv24/900/600","thumb2x":"https://picsum.photos/seed/dv24/1200/800","url":"https://amplify-video-tv.github.io/24","duration":"01:55"},
+      {"id":25,"title":"Video 25","thumb":"https://picsum.photos/seed/dv25/900/600","thumb2x":"https://picsum.photos/seed/dv25/1200/800","url":"https://amplify-video-tv.github.io/25","duration":"03:44"},
+      {"id":26,"title":"Video 26","thumb":"https://picsum.photos/seed/dv26/900/600","thumb2x":"https://picsum.photos/seed/dv26/1200/800","url":"https://amplify-video-tv.github.io/26","duration":"02:29"},
+      {"id":27,"title":"Video 27","thumb":"https://picsum.photos/seed/dv27/900/600","thumb2x":"https://picsum.photos/seed/dv27/1200/800","url":"https://amplify-video-tv.github.io/27","duration":"03:52"},
+      {"id":28,"title":"Video 28","thumb":"https://picsum.photos/seed/dv28/900/600","thumb2x":"https://picsum.photos/seed/dv28/1200/800","url":"https://amplify-video-tv.github.io/28","duration":"04:18"},
+      {"id":29,"title":"Video 29","thumb":"https://picsum.photos/seed/dv29/900/600","thumb2x":"https://picsum.photos/seed/dv29/1200/800","url":"https://amplify-video-tv.github.io/29","duration":"02:02"},
+      {"id":30,"title":"Video 30","thumb":"https://picsum.photos/seed/dv30/900/600","thumb2x":"https://picsum.photos/seed/dv30/1200/800","url":"https://amplify-video-tv.github.io/30","duration":"03:09"}
+    ];
+
+    // New 30 "latest" items (simulated). Replace with your real latest list if available.
+    const moreVideos = Array.from({length:30}, (_,i) => {
+      const id = 31 + i;
+      return {
+        id,
+        title: `Video ${String(id).padStart(2,'0')}`,
+        thumb: `https://picsum.photos/seed/dv${String(id).padStart(2,'0')}/900/600`,
+        thumb2x: `https://picsum.photos/seed/dv${String(id).padStart(2,'0')}/1200/800`,
+        url: `https://amplify-video-tv.github.io/${String(id).padStart(2,'0')}`,
+        duration: `${String(Math.floor(Math.random()*5)+1).padStart(2,'0')}:${String(Math.floor(Math.random()*60)).padStart(2,'0')}`
+      };
+    });
+
+    const list = document.getElementById('list');
+    const search = document.getElementById('search');
+    const shuffleBtn = document.getElementById('shuffle');
+    const readMoreBtn = document.getElementById('readMoreBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const yearEl = document.getElementById('year');
+
+    // top utility links
+    const topDonate = document.getElementById('topDonate');
+    const reportAbuse = document.getElementById('reportAbuse');
+    const advertise = document.getElementById('advertise');
+    const terms = document.getElementById('terms');
+
+    yearEl && (yearEl.textContent = new Date().getFullYear());
+
+    // which dataset is currently shown: "initial" or "more"
+    let currentSet = 'initial';
+
+    // Render function — big thumbnails, overlay like damn.video
+    function render(arr){
+      list.innerHTML = '';
+      arr.forEach(v => {
+        const a = document.createElement('a');
+        a.className = 'card';
+        a.href = v.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('aria-label', v.title);
+
+        a.innerHTML = `
+          <div class="thumb" aria-hidden="true">
+            <img loading="lazy" src="${v.thumb}" srcset="${v.thumb} 640w, ${v.thumb2x} 1200w" sizes="(max-width:720px) 100vw, 50vw" alt="${v.title}">
+            <div class="overlay">
+              <div class="meta-left">
+                <div class="meta-title">${v.title}</div>
+                <div class="meta-sub">Pick ${v.id} • tap to open</div>
+              </div>
+              <div class="meta-right">
+                <div class="duration">${v.duration || '--:--'}</div>
+                <div class="play-pill">▶ Play</div>
+              </div>
+            </div>
+          </div>
+        `;
+        list.appendChild(a);
+      });
+    }
+
+    // initial render: show the provided 30
+    render(initialVideos);
+    currentSet = 'initial';
+    // ensure pager state
+    prevBtn.style.display = 'none';
+    prevBtn.setAttribute('aria-hidden','true');
+    readMoreBtn.textContent = 'Read more';
+
+    // Search: filter the currently visible dataset
+    function getCurrentArray(){
+      return currentSet === 'initial' ? initialVideos : moreVideos;
+    }
+    search && search.addEventListener('input', e => {
+      const q = e.target.value.trim().toLowerCase();
+      const base = getCurrentArray();
+      if(!q) {
+        render(base);
+        return;
+      }
+      const filtered = base.filter(v => v.title.toLowerCase().includes(q) || String(v.id).padStart(2,'0').includes(q));
+      render(filtered);
+    });
+
+    // shuffle current dataset
+    shuffleBtn && shuffleBtn.addEventListener('click', ()=>{
+      const arr = getCurrentArray().slice();
+      for(let i = arr.length -1; i>0; i--){
+        const j = Math.floor(Math.random() * (i+1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      render(arr);
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+
+    // Read more: replace shown items with the "moreVideos" set (hide previous)
+    let moreLoaded = false;
+    readMoreBtn && readMoreBtn.addEventListener('click', ()=>{
+      if(currentSet === 'initial'){
+        render(moreVideos);
+        currentSet = 'more';
+        moreLoaded = true;
+        // update pager UI: show previous, change readMore text
+        prevBtn.style.display = '';
+        prevBtn.setAttribute('aria-hidden','false');
+        readMoreBtn.textContent = 'Newest 30';
+        readMoreBtn.setAttribute('aria-pressed','true');
+        if(search) search.value = '';
+        window.scrollTo({top:0,behavior:'smooth'});
+        return;
+      }
+      // if already on 'more', no-op
+    });
+
+    // Previous: go back to initial 30 (hide the "more" set)
+    prevBtn && prevBtn.addEventListener('click', ()=>{
+      if(currentSet === 'more'){
+        render(initialVideos);
+        currentSet = 'initial';
+        prevBtn.style.display = 'none';
+        prevBtn.setAttribute('aria-hidden','true');
+        readMoreBtn.textContent = 'Read more';
+        readMoreBtn.setAttribute('aria-pressed','false');
+        if(search) search.value = '';
+        window.scrollTo({top:0,behavior:'smooth'});
+      }
+    });
+
+    // ---- Top utility links behavior ----
+    // Set your PayPal link here
+    const payPalHref = "https://www.paypal.com/donate?hosted_button_id=REPLACE_ME";
+    topDonate && topDonate.setAttribute('href', payPalHref);
+    // Example placeholders for other links; replace with your pages
+    reportAbuse && reportAbuse.setAttribute('href', '#report');
+    advertise && advertise.setAttribute('href', '#advertise');
+    terms && terms.setAttribute('href', '#terms');
+
+    // If you want the donate link to open a modal instead, I can change it.
+    // preconnect to picsum for performance
+    const p = document.createElement('link'); p.rel='preconnect'; p.href='https://picsum.photos'; document.head.appendChild(p);
+
+  })();
+  </script>
+</body>
+</html>
