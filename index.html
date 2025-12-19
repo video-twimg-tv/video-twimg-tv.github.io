@@ -13,8 +13,8 @@
       --accent1:#ff6f98;
       --accent2:#ffd07a;
       --glass-border: rgba(255,255,255,0.04);
-      --utility-h:44px;
-      --wrap-w:420px; /* mobile target width */
+      --utility-h:44px;           /* height of the top utility bar */
+      --wrap-w:560px;             /* widened target mobile width center per request */
       --pad:16px;
       --card-radius:12px;
     }
@@ -27,18 +27,18 @@
       background: linear-gradient(180deg,#05040a 0%, #09060d 100%);
       color:#fff;
       -webkit-font-smoothing:antialiased;
-      padding-top: calc(var(--utility-h) + 10px);
+      padding-top: calc(var(--utility-h) + 12px); /* leave room for utility bar */
       -webkit-tap-highlight-color: transparent;
     }
 
-    /* center wrapper (mobile width) */
+    /* centered wider wrapper */
     .wrap{
       max-width:var(--wrap-w);
       margin:0 auto;
       padding:0 var(--pad) 80px;
     }
 
-    /* utility bar: center inner content */
+    /* UTILITY BAR - centered, NO horizontal scroll, fixed width */
     .utility-bar{
       position:fixed;
       left:0; right:0; top:0;
@@ -47,29 +47,44 @@
       align-items:center;
       justify-content:center;
       background:#000;
-      z-index:200;
+      z-index:220;
       border-bottom:1px solid rgba(255,255,255,0.02);
-      font-size:13px;
+      font-size:14px;
     }
     .util-inner{
       width:100%;
       max-width:var(--wrap-w);
       margin:0 auto;
+      padding:0 14px;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
-      padding:0 var(--pad);
-      overflow:hidden;
+      gap:14px;
+      white-space:nowrap;        /* keep one line */
+      overflow:visible;         /* important: no scroll/auto */
+      /* if viewport smaller than max-width, links may be clipped — user allowed widening */
     }
-    .util-inner a{ color:#fff; text-decoration:none; font-weight:500; padding:2px 6px; white-space:nowrap; }
-    .util-inner a.donate{ color:#ffccd7; font-weight:700; }
+    .util-inner a{
+      color:#fff;
+      text-decoration:none;
+      padding:6px 8px;
+      opacity:0.96;
+      font-weight:600;
+      font-size:14px;
+      line-height:1;
+    }
+    .util-inner a.donate{
+      color:#ffccd7;
+      font-weight:800;
+    }
+    .util-sep{ color: rgba(255,255,255,0.16); padding:0 6px; }
 
     /* header */
     header.top{
       display:flex; align-items:center; gap:12px; margin-bottom:10px;
-      position:sticky; top: calc(var(--utility-h) + 8px); z-index:80;
-      background: linear-gradient(180deg, rgba(6,5,10,0.9), rgba(6,5,10,0.6));
+      position:sticky; top: calc(var(--utility-h) + 8px);
+      z-index:80;
+      background: linear-gradient(180deg, rgba(6,5,10,0.92), rgba(6,5,10,0.65));
       padding:10px;
       border-radius:10px;
       border:1px solid rgba(255,255,255,0.02);
@@ -81,12 +96,10 @@
     .small{font-size:12px;color:var(--muted)}
 
     .actions{margin-left:auto; display:flex; gap:8px; align-items:center}
-    .search{height:40px;border-radius:10px;padding:0 12px;border:1px solid var(--glass-border);background:rgba(255,255,255,0.02);color:var(--muted);min-width:140px}
     .btn{padding:8px 10px;border-radius:10px;background:transparent;border:1px solid var(--glass-border);color:var(--muted);font-weight:600}
 
-    /* list */
-    .list{display:flex; flex-direction:column; gap:18px; margin-top:8px}
-
+    /* list/cards */
+    .list{display:flex; flex-direction:column; gap:16px; margin-top:8px}
     .card{
       display:block;
       width:100%;
@@ -97,39 +110,21 @@
       border:1px solid rgba(255,255,255,0.03);
       box-shadow: 0 6px 22px rgba(0,0,0,0.6);
       text-decoration:none; color:inherit;
-      transform: translateZ(0);
+      -webkit-tap-highlight-color:transparent;
     }
+    .thumb{width:100%; height:170px; background:#111; display:block; position:relative}
+    .thumb img{width:100%; height:100%; object-fit:cover; display:block}
 
-    .thumb{
-      width:100%;
-      height:170px;
-      background:#111;
-      display:block;
-      position:relative;
-    }
-    .thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:0; }
-
-    .overlay{
-      position:absolute; left:12px; right:12px; bottom:12px;
-      padding:0;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:12px;
-      pointer-events:none; /* allow clicks through overlay to the link */
-    }
-
+    .overlay{position:absolute; left:12px; right:12px; bottom:12px; padding:0; display:flex; align-items:center; justify-content:space-between; gap:12px; pointer-events:none;}
     .meta-left{display:flex; flex-direction:column; gap:4px; min-width:0}
     .meta-title{font-weight:700;font-size:15px;margin:0;color:#fff;text-shadow:0 3px 10px rgba(0,0,0,0.6)}
     .meta-sub{font-size:12px;color:var(--muted)}
 
     .meta-right{display:flex; gap:10px; align-items:center; flex-shrink:0}
-    .duration{background: rgba(0,0,0,0.6); padding:6px 8px; border-radius:12px; font-weight:700; color:#fff; font-size:12px; box-shadow:0 6px 18px rgba(0,0,0,0.6)}
-    .play-pill{pointer-events:auto;background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:#111; padding:8px 12px; border-radius:999px; font-weight:800; font-size:13px; box-shadow:0 8px 26px rgba(0,0,0,0.55)}
+    .duration{background: rgba(0,0,0,0.6); padding:6px 8px; border-radius:12px; font-weight:700; color:#fff; font-size:12px}
+    .play-pill{pointer-events:auto;background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:#111; padding:8px 12px; border-radius:999px; font-weight:800; font-size:13px}
 
-    /* ensure clickable area around play is not tiny on mobile */
-    .play-pill { touch-action: manipulation; }
-
-    /* tighter spacing between cards like screenshot */
-    .card + .card { margin-top:8px; }
+    .card + .card{ margin-top:8px; }
 
     .pager-wrap{display:flex; justify-content:center; gap:12px; margin-top:18px; margin-bottom:36px}
     .pager-btn{padding:12px 20px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#111;border:none;font-weight:800}
@@ -144,22 +139,23 @@
   </style>
 </head>
 <body>
+  <!-- utility bar -->
   <div class="utility-bar" role="navigation" aria-label="Utility links">
-    <div class="util-inner">
+    <div class="util-inner" id="utilInner">
       <a href="#report" id="reportAbuse">Report Abuse</a>
-      <span style="color:rgba(255,255,255,0.12)">|</span>
-      <a id="topDonate" class="donate">Donate! ❤️</a>
-      <span style="color:rgba(255,255,255,0.12)">|</span>
+      <span class="util-sep">|</span>
+      <a id="topDonate" class="donate" href="#">Donate! ❤️</a>
+      <span class="util-sep">|</span>
       <a href="#advertise" id="advertise">Advertise</a>
-      <span style="color:rgba(255,255,255,0.12)">|</span>
+      <span class="util-sep">|</span>
       <a href="#terms" id="terms">Terms of Service (Rules!)</a>
     </div>
   </div>
 
   <div class="wrap">
-    <header class="top" role="banner" aria-label="Header">
+    <header class="top" role="banner">
       <div class="brand">
-        <div class="logo" aria-hidden="true">VT</div>
+        <div class="logo">VT</div>
         <div>
           <div class="title">Educational Video Collection</div>
           <div class="small">News & Lifestyle</div>
@@ -167,7 +163,7 @@
       </div>
 
       <div class="actions" role="search">
-        <input id="search" class="search" placeholder="Search title or number..." aria-label="Search videos" />
+        <!-- Search removed per request -->
         <button id="shuffle" class="btn" title="Shuffle">Shuffle</button>
       </div>
     </header>
@@ -177,9 +173,9 @@
         <!-- cards inserted by JS -->
       </section>
 
-      <div class="pager-wrap" aria-hidden="false">
-        <button id="prevBtn" class="pager-btn secondary" style="display:none" aria-hidden="true">Previous</button>
-        <button id="readMoreBtn" class="pager-btn" aria-pressed="false">Read more</button>
+      <div class="pager-wrap">
+        <button id="prevBtn" class="pager-btn secondary" style="display:none">Previous</button>
+        <button id="readMoreBtn" class="pager-btn">Read more</button>
       </div>
     </main>
 
@@ -189,28 +185,72 @@
   <script>
   (function(){
     const initialVideos = [
-      {"id":1,"title":"AxBpnxJ41.mp4","thumb":"https://cdn.aceimg.com/a5a7c0162.jpg","thumb2x":"https://cdn.aceimg.com/a5a7c0162.jpg","url":"https://amplify-video-tv.github.io/AxBpnxJ41.mp4","duration":"2:37"},
-      {"id":2,"title":"Video 02","thumb":"https://picsum.photos/seed/dv02/900/600","thumb2x":"https://picsum.photos/seed/dv02/1200/800","url":"https://amplify-video-tv.github.io/02","duration":"02:09"},
-      {"id":3,"title":"Video 03","thumb":"https://picsum.photos/seed/dv03/900/600","thumb2x":"https://picsum.photos/seed/dv03/1200/800","url":"https://amplify-video-tv.github.io/03","duration":"04:12"},
-      {"id":4,"title":"Video 04","thumb":"https://picsum.photos/seed/dv04/900/600","thumb2x":"https://picsum.photos/seed/dv04/1200/800","url":"https://amplify-video-tv.github.io/04","duration":"01:58"},
-      {"id":5,"title":"Video 05","thumb":"https://picsum.photos/seed/dv05/900/600","thumb2x":"https://picsum.photos/seed/dv05/1200/800","url":"https://amplify-video-tv.github.io/05","duration":"05:03"},
-      {"id":6,"title":"Video 06","thumb":"https://picsum.photos/seed/dv06/900/600","thumb2x":"https://picsum.photos/seed/dv06/1200/800","url":"https://amplify-video-tv.github.io/06","duration":"02:45"}
+      {"id":1,"title":"Video 01","thumb":"https://picsum.photos/seed/vt1/900/600","thumb2x":"https://picsum.photos/seed/vt1/1200/800","url":"https://example.com/watch/01","duration":"03:21"},
+      {"id":2,"title":"Video 02","thumb":"https://picsum.photos/seed/vt2/900/600","thumb2x":"https://picsum.photos/seed/vt2/1200/800","url":"https://example.com/watch/02","duration":"02:09"},
+      {"id":3,"title":"Video 03","thumb":"https://picsum.photos/seed/vt3/900/600","thumb2x":"https://picsum.photos/seed/vt3/1200/800","url":"https://example.com/watch/03","duration":"04:12"},
+      {"id":4,"title":"Video 04","thumb":"https://picsum.photos/seed/vt4/900/600","thumb2x":"https://picsum.photos/seed/vt4/1200/800","url":"https://example.com/watch/04","duration":"01:58"},
+      {"id":5,"title":"Video 05","thumb":"https://picsum.photos/seed/vt5/900/600","thumb2x":"https://picsum.photos/seed/vt5/1200/800","url":"https://example.com/watch/05","duration":"05:03"},
+      {"id":6,"title":"Video 06","thumb":"https://picsum.photos/seed/vt6/900/600","thumb2x":"https://picsum.photos/seed/vt6/1200/800","url":"https://example.com/watch/06","duration":"02:45"},
+      {"id":7,"title":"Video 07","thumb":"https://picsum.photos/seed/vt7/900/600","thumb2x":"https://picsum.photos/seed/vt7/1200/800","url":"https://example.com/watch/07","duration":"03:34"},
+      {"id":8,"title":"Video 08","thumb":"https://picsum.photos/seed/vt8/900/600","thumb2x":"https://picsum.photos/seed/vt8/1200/800","url":"https://example.com/watch/08","duration":"02:26"},
+      {"id":9,"title":"Video 09","thumb":"https://picsum.photos/seed/vt9/900/600","thumb2x":"https://picsum.photos/seed/vt9/1200/800","url":"https://example.com/watch/09","duration":"04:44"},
+      {"id":10,"title":"Video 10","thumb":"https://picsum.photos/seed/vt10/900/600","thumb2x":"https://picsum.photos/seed/vt10/1200/800","url":"https://example.com/watch/10","duration":"03:10"},
+      {"id":11,"title":"Video 11","thumb":"https://picsum.photos/seed/vt11/900/600","thumb2x":"https://picsum.photos/seed/vt11/1200/800","url":"https://example.com/watch/11","duration":"02:55"},
+      {"id":12,"title":"Video 12","thumb":"https://picsum.photos/seed/vt12/900/600","thumb2x":"https://picsum.photos/seed/vt12/1200/800","url":"https://example.com/watch/12","duration":"01:42"},
+      {"id":13,"title":"Video 13","thumb":"https://picsum.photos/seed/vt13/900/600","thumb2x":"https://picsum.photos/seed/vt13/1200/800","url":"https://example.com/watch/13","duration":"06:01"},
+      {"id":14,"title":"Video 14","thumb":"https://picsum.photos/seed/vt14/900/600","thumb2x":"https://picsum.photos/seed/vt14/1200/800","url":"https://example.com/watch/14","duration":"02:20"},
+      {"id":15,"title":"Video 15","thumb":"https://picsum.photos/seed/vt15/900/600","thumb2x":"https://picsum.photos/seed/vt15/1200/800","url":"https://example.com/watch/15","duration":"03:05"},
+      {"id":16,"title":"Video 16","thumb":"https://picsum.photos/seed/vt16/900/600","thumb2x":"https://picsum.photos/seed/vt16/1200/800","url":"https://example.com/watch/16","duration":"02:48"},
+      {"id":17,"title":"Video 17","thumb":"https://picsum.photos/seed/vt17/900/600","thumb2x":"https://picsum.photos/seed/vt17/1200/800","url":"https://example.com/watch/17","duration":"03:30"},
+      {"id":18,"title":"Video 18","thumb":"https://picsum.photos/seed/vt18/900/600","thumb2x":"https://picsum.photos/seed/vt18/1200/800","url":"https://example.com/watch/18","duration":"04:00"},
+      {"id":19,"title":"Video 19","thumb":"https://picsum.photos/seed/vt19/900/600","thumb2x":"https://picsum.photos/seed/vt19/1200/800","url":"https://example.com/watch/19","duration":"02:12"},
+      {"id":20,"title":"Video 20","thumb":"https://picsum.photos/seed/vt20/900/600","thumb2x":"https://picsum.photos/seed/vt20/1200/800","url":"https://example.com/watch/20","duration":"05:20"},
+      {"id":21,"title":"Video 21","thumb":"https://picsum.photos/seed/vt21/900/600","thumb2x":"https://picsum.photos/seed/vt21/1200/800","url":"https://example.com/watch/21","duration":"03:18"},
+      {"id":22,"title":"Video 22","thumb":"https://picsum.photos/seed/vt22/900/600","thumb2x":"https://picsum.photos/seed/vt22/1200/800","url":"https://example.com/watch/22","duration":"02:37"},
+      {"id":23,"title":"Video 23","thumb":"https://picsum.photos/seed/vt23/900/600","thumb2x":"https://picsum.photos/seed/vt23/1200/800","url":"https://example.com/watch/23","duration":"04:09"},
+      {"id":24,"title":"Video 24","thumb":"https://picsum.photos/seed/vt24/900/600","thumb2x":"https://picsum.photos/seed/vt24/1200/800","url":"https://example.com/watch/24","duration":"01:55"},
+      {"id":25,"title":"Video 25","thumb":"https://picsum.photos/seed/vt25/900/600","thumb2x":"https://picsum.photos/seed/vt25/1200/800","url":"https://example.com/watch/25","duration":"03:44"},
+      {"id":26,"title":"Video 26","thumb":"https://picsum.photos/seed/vt26/900/600","thumb2x":"https://picsum.photos/seed/vt26/1200/800","url":"https://example.com/watch/26","duration":"02:29"},
+      {"id":27,"title":"Video 27","thumb":"https://picsum.photos/seed/vt27/900/600","thumb2x":"https://picsum.photos/seed/vt27/1200/800","url":"https://example.com/watch/27","duration":"03:52"},
+      {"id":28,"title":"Video 28","thumb":"https://picsum.photos/seed/vt28/900/600","thumb2x":"https://picsum.photos/seed/vt28/1200/800","url":"https://example.com/watch/28","duration":"04:18"},
+      {"id":29,"title":"Video 29","thumb":"https://picsum.photos/seed/vt29/900/600","thumb2x":"https://picsum.photos/seed/vt29/1200/800","url":"https://example.com/watch/29","duration":"02:02"},
+      {"id":30,"title":"Video 30","thumb":"https://picsum.photos/seed/vt30/900/600","thumb2x":"https://picsum.photos/seed/vt30/1200/800","url":"https://example.com/watch/30","duration":"03:09"}
     ];
 
-    const moreVideos = Array.from({length:30}, (_,i)=> {
-      const id = 31 + i;
-      return {
-        id,
-        title: `Video ${String(id).padStart(2,'0')}`,
-        thumb: `https://picsum.photos/seed/dv${String(id).padStart(2,'0')}/900/600`,
-        thumb2x: `https://picsum.photos/seed/dv${String(id).padStart(2,'0')}/1200/800`,
-        url: `https://amplify-video-tv.github.io/${String(id).padStart(2,'0')}`,
-        duration: `${String(Math.floor(Math.random()*5)+1).padStart(2,'0')}:${String(Math.floor(Math.random()*60)).padStart(2,'0')}`
-      };
-    });
+    const moreVideos = [
+      {"id":31,"title":"Video 31","thumb":"https://picsum.photos/seed/v31/900/600","thumb2x":"https://picsum.photos/seed/v31/1200/800","url":"https://example.com/watch/31","duration":"02:20"},
+      {"id":32,"title":"Video 32","thumb":"https://picsum.photos/seed/v32/900/600","thumb2x":"https://picsum.photos/seed/v32/1200/800","url":"https://example.com/watch/32","duration":"01:07"},
+      {"id":33,"title":"Video 33","thumb":"https://picsum.photos/seed/v33/900/600","thumb2x":"https://picsum.photos/seed/v33/1200/800","url":"https://example.com/watch/33","duration":"03:57"},
+      {"id":34,"title":"Video 34","thumb":"https://picsum.photos/seed/v34/900/600","thumb2x":"https://picsum.photos/seed/v34/1200/800","url":"https://example.com/watch/34","duration":"02:44"},
+      {"id":35,"title":"Video 35","thumb":"https://picsum.photos/seed/v35/900/600","thumb2x":"https://picsum.photos/seed/v35/1200/800","url":"https://example.com/watch/35","duration":"03:31"},
+      {"id":36,"title":"Video 36","thumb":"https://picsum.photos/seed/v36/900/600","thumb2x":"https://picsum.photos/seed/v36/1200/800","url":"https://example.com/watch/36","duration":"04:05"},
+      {"id":37,"title":"Video 37","thumb":"https://picsum.photos/seed/v37/900/600","thumb2x":"https://picsum.photos/seed/v37/1200/800","url":"https://example.com/watch/37","duration":"03:12"},
+      {"id":38,"title":"Video 38","thumb":"https://picsum.photos/seed/v38/900/600","thumb2x":"https://picsum.photos/seed/v38/1200/800","url":"https://example.com/watch/38","duration":"02:18"},
+      {"id":39,"title":"Video 39","thumb":"https://picsum.photos/seed/v39/900/600","thumb2x":"https://picsum.photos/seed/v39/1200/800","url":"https://example.com/watch/39","duration":"04:44"},
+      {"id":40,"title":"Video 40","thumb":"https://picsum.photos/seed/v40/900/600","thumb2x":"https://picsum.photos/seed/v40/1200/800","url":"https://example.com/watch/40","duration":"03:10"},
+      {"id":41,"title":"Video 41","thumb":"https://picsum.photos/seed/v41/900/600","thumb2x":"https://picsum.photos/seed/v41/1200/800","url":"https://example.com/watch/41","duration":"02:55"},
+      {"id":42,"title":"Video 42","thumb":"https://picsum.photos/seed/v42/900/600","thumb2x":"https://picsum.photos/seed/v42/1200/800","url":"https://example.com/watch/42","duration":"01:42"},
+      {"id":43,"title":"Video 43","thumb":"https://picsum.photos/seed/v43/900/600","thumb2x":"https://picsum.photos/seed/v43/1200/800","url":"https://example.com/watch/43","duration":"06:01"},
+      {"id":44,"title":"Video 44","thumb":"https://picsum.photos/seed/v44/900/600","thumb2x":"https://picsum.photos/seed/v44/1200/800","url":"https://example.com/watch/44","duration":"02:20"},
+      {"id":45,"title":"Video 45","thumb":"https://picsum.photos/seed/v45/900/600","thumb2x":"https://picsum.photos/seed/v45/1200/800","url":"https://example.com/watch/45","duration":"03:05"},
+      {"id":46,"title":"Video 46","thumb":"https://picsum.photos/seed/v46/900/600","thumb2x":"https://picsum.photos/seed/v46/1200/800","url":"https://example.com/watch/46","duration":"02:48"},
+      {"id":47,"title":"Video 47","thumb":"https://picsum.photos/seed/v47/900/600","thumb2x":"https://picsum.photos/seed/v47/1200/800","url":"https://example.com/watch/47","duration":"03:30"},
+      {"id":48,"title":"Video 48","thumb":"https://picsum.photos/seed/v48/900/600","thumb2x":"https://picsum.photos/seed/v48/1200/800","url":"https://example.com/watch/48","duration":"04:00"},
+      {"id":49,"title":"Video 49","thumb":"https://picsum.photos/seed/v49/900/600","thumb2x":"https://picsum.photos/seed/v49/1200/800","url":"https://example.com/watch/49","duration":"02:12"},
+      {"id":50,"title":"Video 50","thumb":"https://picsum.photos/seed/v50/900/600","thumb2x":"https://picsum.photos/seed/v50/1200/800","url":"https://example.com/watch/50","duration":"05:20"},
+      {"id":51,"title":"Video 51","thumb":"https://picsum.photos/seed/v51/900/600","thumb2x":"https://picsum.photos/seed/v51/1200/800","url":"https://example.com/watch/51","duration":"03:18"},
+      {"id":52,"title":"Video 52","thumb":"https://picsum.photos/seed/v52/900/600","thumb2x":"https://picsum.photos/seed/v52/1200/800","url":"https://example.com/watch/52","duration":"02:37"},
+      {"id":53,"title":"Video 53","thumb":"https://picsum.photos/seed/v53/900/600","thumb2x":"https://picsum.photos/seed/v53/1200/800","url":"https://example.com/watch/53","duration":"04:09"},
+      {"id":54,"title":"Video 54","thumb":"https://picsum.photos/seed/v54/900/600","thumb2x":"https://picsum.photos/seed/v54/1200/800","url":"https://example.com/watch/54","duration":"01:55"},
+      {"id":55,"title":"Video 55","thumb":"https://picsum.photos/seed/v55/900/600","thumb2x":"https://picsum.photos/seed/v55/1200/800","url":"https://example.com/watch/55","duration":"03:44"},
+      {"id":56,"title":"Video 56","thumb":"https://picsum.photos/seed/v56/900/600","thumb2x":"https://picsum.photos/seed/v56/1200/800","url":"https://example.com/watch/56","duration":"02:29"},
+      {"id":57,"title":"Video 57","thumb":"https://picsum.photos/seed/v57/900/600","thumb2x":"https://picsum.photos/seed/v57/1200/800","url":"https://example.com/watch/57","duration":"03:52"},
+      {"id":58,"title":"Video 58","thumb":"https://picsum.photos/seed/v58/900/600","thumb2x":"https://picsum.photos/seed/v58/1200/800","url":"https://example.com/watch/58","duration":"04:18"},
+      {"id":59,"title":"Video 59","thumb":"https://picsum.photos/seed/v59/900/600","thumb2x":"https://picsum.photos/seed/v59/1200/800","url":"https://example.com/watch/59","duration":"02:02"},
+      {"id":60,"title":"Video 60","thumb":"https://picsum.photos/seed/v60/900/600","thumb2x":"https://picsum.photos/seed/v60/1200/800","url":"https://example.com/watch/60","duration":"03:09"}
+    ];
 
     const list = document.getElementById('list');
-    const search = document.getElementById('search');
     const shuffleBtn = document.getElementById('shuffle');
     const readMoreBtn = document.getElementById('readMoreBtn');
     const prevBtn = document.getElementById('prevBtn');
@@ -248,22 +288,34 @@
       });
     }
 
-    render(initialVideos);
+    // initial display uses the first 30 (initialVideos)
+    render(initialVideos.slice(0,30));
     prevBtn.style.display = 'none';
     readMoreBtn.textContent = 'Read more';
 
-    function getCurrent(){ return currentSet === 'initial' ? initialVideos : moreVideos; }
+    // Read more loads the next 30 (moreVideos)
+    readMoreBtn && readMoreBtn.addEventListener('click', ()=>{
+      if(currentSet === 'initial'){
+        render(moreVideos.slice(0,30));
+        currentSet = 'more';
+        prevBtn.style.display = '';
+        readMoreBtn.textContent = 'Newest 30';
+        window.scrollTo({top:0, behavior:'smooth'});
+      }
+    });
 
-    search && search.addEventListener('input', e=>{
-      const q = e.target.value.trim().toLowerCase();
-      const base = getCurrent();
-      if(!q){ render(base); return; }
-      const filtered = base.filter(v => v.title.toLowerCase().includes(q) || String(v.id).includes(q));
-      render(filtered);
+    prevBtn && prevBtn.addEventListener('click', ()=>{
+      if(currentSet === 'more'){
+        render(initialVideos.slice(0,30));
+        currentSet = 'initial';
+        prevBtn.style.display = 'none';
+        readMoreBtn.textContent = 'Read more';
+        window.scrollTo({top:0, behavior:'smooth'});
+      }
     });
 
     shuffleBtn && shuffleBtn.addEventListener('click', ()=>{
-      const arr = getCurrent().slice();
+      const arr = (currentSet === 'initial' ? initialVideos.slice(0,30) : moreVideos.slice(0,30)).slice();
       for(let i = arr.length-1; i>0; i--){
         const j = Math.floor(Math.random()*(i+1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -271,29 +323,9 @@
       render(arr); window.scrollTo({top:0, behavior:'smooth'});
     });
 
-    readMoreBtn && readMoreBtn.addEventListener('click', ()=>{
-      if(currentSet === 'initial'){
-        render(moreVideos);
-        currentSet = 'more';
-        prevBtn.style.display = '';
-        readMoreBtn.textContent = 'Newest 30';
-        if(search) search.value = '';
-        window.scrollTo({top:0, behavior:'smooth'});
-      }
-    });
-    prevBtn && prevBtn.addEventListener('click', ()=>{
-      if(currentSet === 'more'){
-        render(initialVideos);
-        currentSet = 'initial';
-        prevBtn.style.display = 'none';
-        readMoreBtn.textContent = 'Read more';
-        if(search) search.value = '';
-        window.scrollTo({top:0, behavior:'smooth'});
-      }
-    });
-
     topDonate && topDonate.addEventListener('click', (e)=>{ e.preventDefault(); window.open('https://www.paypal.com/donate?hosted_button_id=REPLACE_ME','_blank','noopener'); });
 
+    // performance preconnect
     const p = document.createElement('link'); p.rel='preconnect'; p.href='https://picsum.photos'; document.head.appendChild(p);
   })();
   </script>
