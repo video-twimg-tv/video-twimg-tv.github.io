@@ -4,43 +4,41 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Video-twimg-tv — Lifestyle</title>
-  <meta name="description" content="Mobile-first gallery — tidy layout" />
+  <meta name="description" content="Mobile-first gallery — centered tidy layout" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#06050a;
-      --panel:#0d0b10;
       --muted:rgba(255,255,255,0.72);
       --accent1:#ff6f98;
       --accent2:#ffd07a;
       --glass-border: rgba(255,255,255,0.04);
       --utility-h:44px;
-      --container-pad:14px;
-      --card-radius:14px;
+      --wrap-w:420px; /* mobile target width */
+      --pad:16px;
+      --card-radius:12px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
       background: linear-gradient(180deg,#05040a 0%, #09060d 100%);
       color:#fff;
       -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
       padding-top: calc(var(--utility-h) + 10px);
       -webkit-tap-highlight-color: transparent;
-      -webkit-font-smoothing:antialiased;
     }
 
-    /* narrow centered container for nicer mobile look */
+    /* center wrapper (mobile width) */
     .wrap{
-      max-width:760px;
+      max-width:var(--wrap-w);
       margin:0 auto;
-      padding:0 var(--container-pad) 80px;
+      padding:0 var(--pad) 80px;
     }
 
-    /* Utility bar (top center) */
+    /* utility bar: center inner content */
     .utility-bar{
       position:fixed;
       left:0; right:0; top:0;
@@ -49,112 +47,111 @@
       align-items:center;
       justify-content:center;
       background:#000;
-      z-index:180;
+      z-index:200;
       border-bottom:1px solid rgba(255,255,255,0.02);
       font-size:13px;
     }
-    .util-links{display:flex; align-items:center; gap:8px}
-    .util-links a{
-      color:#fff; text-decoration:none; padding:6px 6px; opacity:0.95; font-weight:500;
+    .util-inner{
+      width:100%;
+      max-width:var(--wrap-w);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:0 var(--pad);
+      overflow:hidden;
     }
-    .util-links a.donate{ color: #ffccd7; font-weight:700; }
+    .util-inner a{ color:#fff; text-decoration:none; font-weight:500; padding:2px 6px; white-space:nowrap; }
+    .util-inner a.donate{ color:#ffccd7; font-weight:700; }
 
-    /* header compact */
+    /* header */
     header.top{
       display:flex; align-items:center; gap:12px; margin-bottom:10px;
-      position:sticky; top: calc(var(--utility-h) + 6px);
-      z-index:60;
+      position:sticky; top: calc(var(--utility-h) + 8px); z-index:80;
       background: linear-gradient(180deg, rgba(6,5,10,0.9), rgba(6,5,10,0.6));
-      padding:10px 12px;
+      padding:10px;
       border-radius:10px;
       border:1px solid rgba(255,255,255,0.02);
       backdrop-filter: blur(4px);
     }
-    .brand{display:flex; gap:10px; align-items:center}
-    .logo{
-      width:44px; height:44px; border-radius:10px;
-      background:linear-gradient(135deg,var(--accent1),var(--accent2));
-      display:flex;align-items:center;justify-content:center;color:#111;font-weight:700;font-family:Playfair Display,serif;
-    }
+    .brand{display:flex; gap:10px; align-items:center; min-width:0}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:#111;font-weight:700;font-family:Playfair Display,serif}
     .title{font-weight:700;font-size:15px}
     .small{font-size:12px;color:var(--muted)}
 
     .actions{margin-left:auto; display:flex; gap:8px; align-items:center}
-    .search{
-      height:40px; border-radius:10px; padding:0 12px; border:1px solid var(--glass-border);
-      background: rgba(255,255,255,0.02); color:var(--muted); outline:none; font-size:14px; min-width:150px;
-    }
+    .search{height:40px;border-radius:10px;padding:0 12px;border:1px solid var(--glass-border);background:rgba(255,255,255,0.02);color:var(--muted);min-width:140px}
     .btn{padding:8px 10px;border-radius:10px;background:transparent;border:1px solid var(--glass-border);color:var(--muted);font-weight:600}
 
     /* list */
-    .list{display:flex; flex-direction:column; gap:16px; margin-top:6px}
+    .list{display:flex; flex-direction:column; gap:18px; margin-top:8px}
 
     .card{
       display:block;
+      width:100%;
       border-radius:var(--card-radius);
       overflow:hidden;
       position:relative;
       background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
-      border:1px solid var(--glass-border);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 6px 22px rgba(0,0,0,0.6);
       text-decoration:none; color:inherit;
+      transform: translateZ(0);
     }
 
-    /* make thumb slightly taller, full-bleed in container */
-    .thumb{width:100%; height:180px; background:#111; display:block; position:relative}
-    .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+    .thumb{
+      width:100%;
+      height:170px;
+      background:#111;
+      display:block;
+      position:relative;
+    }
+    .thumb img{ width:100%; height:100%; object-fit:cover; display:block; border-radius:0; }
 
-    /* overlay styles — consistent left padding, rounded inner labels */
     .overlay{
-      position:absolute; left:0; right:0; bottom:0;
-      padding:14px;
+      position:absolute; left:12px; right:12px; bottom:12px;
+      padding:0;
       display:flex; align-items:center; justify-content:space-between;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 80%);
       gap:12px;
+      pointer-events:none; /* allow clicks through overlay to the link */
     }
+
     .meta-left{display:flex; flex-direction:column; gap:4px; min-width:0}
-    .meta-title{font-weight:700;font-size:15px;margin:0;color:#fff; text-shadow: 0 3px 10px rgba(0,0,0,0.6)}
+    .meta-title{font-weight:700;font-size:15px;margin:0;color:#fff;text-shadow:0 3px 10px rgba(0,0,0,0.6)}
     .meta-sub{font-size:12px;color:var(--muted)}
 
     .meta-right{display:flex; gap:10px; align-items:center; flex-shrink:0}
-    .duration{
-      background: rgba(0,0,0,0.6); padding:6px 8px; border-radius:12px; font-weight:700; color:#fff; font-size:12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-    }
-    .play-pill{
-      background: linear-gradient(90deg,var(--accent1),var(--accent2));
-      color:#111; padding:8px 12px; border-radius:999px; font-weight:800; font-size:13px;
-      box-shadow: 0 8px 26px rgba(0,0,0,0.55);
-    }
+    .duration{background: rgba(0,0,0,0.6); padding:6px 8px; border-radius:12px; font-weight:700; color:#fff; font-size:12px; box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+    .play-pill{pointer-events:auto;background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:#111; padding:8px 12px; border-radius:999px; font-weight:800; font-size:13px; box-shadow:0 8px 26px rgba(0,0,0,0.55)}
 
-    /* subtle divider line between cards (dark strip like in screenshot) */
-    .card + .card{ margin-top: 6px; }
+    /* ensure clickable area around play is not tiny on mobile */
+    .play-pill { touch-action: manipulation; }
 
-    /* pager */
+    /* tighter spacing between cards like screenshot */
+    .card + .card { margin-top:8px; }
+
     .pager-wrap{display:flex; justify-content:center; gap:12px; margin-top:18px; margin-bottom:36px}
     .pager-btn{padding:12px 20px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#111;border:none;font-weight:800}
     .pager-btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
 
-    /* footer */
-    footer{ text-align:center; color:var(--muted); font-size:13px; margin-top:8px; padding-bottom: 20px;}
+    footer{ text-align:center;color:var(--muted); font-size:13px; margin-top:8px; padding-bottom:20px;}
 
-    /* responsive tweaks for tablet */
     @media(min-width:720px){
-      .wrap{padding:0 20px}
-      .thumb{height:200px}
-      .list{gap:18px}
+      .wrap{ padding:0 18px; }
+      .thumb{ height:200px; }
     }
   </style>
 </head>
 <body>
   <div class="utility-bar" role="navigation" aria-label="Utility links">
-    <div class="util-links">
+    <div class="util-inner">
       <a href="#report" id="reportAbuse">Report Abuse</a>
-      <span style="color:rgba(255,255,255,0.18)">|</span>
-      <a id="topDonate" class="donate" href="#">Donate! ❤️</a>
-      <span style="color:rgba(255,255,255,0.18)">|</span>
+      <span style="color:rgba(255,255,255,0.12)">|</span>
+      <a id="topDonate" class="donate">Donate! ❤️</a>
+      <span style="color:rgba(255,255,255,0.12)">|</span>
       <a href="#advertise" id="advertise">Advertise</a>
-      <span style="color:rgba(255,255,255,0.18)">|</span>
+      <span style="color:rgba(255,255,255,0.12)">|</span>
       <a href="#terms" id="terms">Terms of Service (Rules!)</a>
     </div>
   </div>
@@ -177,7 +174,7 @@
 
     <main>
       <section id="list" class="list" aria-live="polite" aria-label="Video list">
-        <!-- generated by JS -->
+        <!-- cards inserted by JS -->
       </section>
 
       <div class="pager-wrap" aria-hidden="false">
@@ -191,7 +188,6 @@
 
   <script>
   (function(){
-    // sample dataset (kept your amplify-video-tv URLs)
     const initialVideos = [
       {"id":1,"title":"AxBpnxJ41.mp4","thumb":"https://cdn.aceimg.com/a5a7c0162.jpg","thumb2x":"https://cdn.aceimg.com/a5a7c0162.jpg","url":"https://amplify-video-tv.github.io/AxBpnxJ41.mp4","duration":"2:37"},
       {"id":2,"title":"Video 02","thumb":"https://picsum.photos/seed/dv02/900/600","thumb2x":"https://picsum.photos/seed/dv02/1200/800","url":"https://amplify-video-tv.github.io/02","duration":"02:09"},
@@ -199,10 +195,8 @@
       {"id":4,"title":"Video 04","thumb":"https://picsum.photos/seed/dv04/900/600","thumb2x":"https://picsum.photos/seed/dv04/1200/800","url":"https://amplify-video-tv.github.io/04","duration":"01:58"},
       {"id":5,"title":"Video 05","thumb":"https://picsum.photos/seed/dv05/900/600","thumb2x":"https://picsum.photos/seed/dv05/1200/800","url":"https://amplify-video-tv.github.io/05","duration":"05:03"},
       {"id":6,"title":"Video 06","thumb":"https://picsum.photos/seed/dv06/900/600","thumb2x":"https://picsum.photos/seed/dv06/1200/800","url":"https://amplify-video-tv.github.io/06","duration":"02:45"}
-      // ... you can keep rest of your items here
     ];
 
-    // simulated moreVideos for Read more (replace with real data if available)
     const moreVideos = Array.from({length:30}, (_,i)=> {
       const id = 31 + i;
       return {
@@ -234,7 +228,6 @@
         a.href = v.url;
         a.target = '_blank';
         a.rel = 'noopener';
-        a.setAttribute('aria-label', v.title);
 
         a.innerHTML = `
           <div class="thumb" aria-hidden="true">
@@ -259,29 +252,25 @@
     prevBtn.style.display = 'none';
     readMoreBtn.textContent = 'Read more';
 
-    function getCurrentArray(){ return currentSet === 'initial' ? initialVideos : moreVideos; }
+    function getCurrent(){ return currentSet === 'initial' ? initialVideos : moreVideos; }
 
-    // search
     search && search.addEventListener('input', e=>{
       const q = e.target.value.trim().toLowerCase();
-      const base = getCurrentArray();
+      const base = getCurrent();
       if(!q){ render(base); return; }
       const filtered = base.filter(v => v.title.toLowerCase().includes(q) || String(v.id).includes(q));
       render(filtered);
     });
 
-    // shuffle
     shuffleBtn && shuffleBtn.addEventListener('click', ()=>{
-      const arr = getCurrentArray().slice();
+      const arr = getCurrent().slice();
       for(let i = arr.length-1; i>0; i--){
         const j = Math.floor(Math.random()*(i+1));
         [arr[i], arr[j]] = [arr[j], arr[i]];
       }
-      render(arr);
-      window.scrollTo({top:0, behavior:'smooth'});
+      render(arr); window.scrollTo({top:0, behavior:'smooth'});
     });
 
-    // read more / prev logic
     readMoreBtn && readMoreBtn.addEventListener('click', ()=>{
       if(currentSet === 'initial'){
         render(moreVideos);
@@ -303,14 +292,8 @@
       }
     });
 
-    // top donate link (could open modal or go to PayPal)
-    topDonate && topDonate.addEventListener('click', (e)=>{
-      e.preventDefault();
-      // open PayPal (replace with your link) in new tab
-      window.open('https://www.paypal.com/donate?hosted_button_id=REPLACE_ME','_blank','noopener');
-    });
+    topDonate && topDonate.addEventListener('click', (e)=>{ e.preventDefault(); window.open('https://www.paypal.com/donate?hosted_button_id=REPLACE_ME','_blank','noopener'); });
 
-    // preconnect for thumbnails
     const p = document.createElement('link'); p.rel='preconnect'; p.href='https://picsum.photos'; document.head.appendChild(p);
   })();
   </script>
