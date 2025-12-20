@@ -144,7 +144,7 @@
     <div class="util-inner" id="utilInner">
       <a href="#report" id="reportAbuse">Report Abuse</a>
       <span class="util-sep">|</span>
-      <a id="topDonate" class="donate" href="donate">Donate! ❤️</a>
+      <a id="topDonate" class="donate" href="#donate">Donate! ❤️</a>
       <span class="util-sep">|</span>
       <a href="#advertise" id="advertise">Advertise</a>
     </div>
@@ -339,7 +339,7 @@
       render(arr); window.scrollTo({top:0, behavior:'smooth'});
     });
 
-    topDonate && topDonate.addEventListener('click', (e)=>{ e.preventDefault(); window.open('https://video-twimg-tv.github.io#donate','_blank','noopener'); });
+    topDonate && topDonate.addEventListener('click', (e)=>{ e.preventDefault(); window.open('https://video-twimg-tv.github.io/donate','_blank','noopener'); });
 
     // performance preconnect
     const p = document.createElement('link'); p.rel='preconnect'; p.href='https://picsum.photos'; document.head.appendChild(p);
