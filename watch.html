@@ -1,32 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
 <title>Watch Video</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="https://cdn.tailwindcss.com"></script>
-<style>body{background:#000;color:white}</style>
+<style>
+body{margin:0;background:#000;color:#fff}
+video{width:100%;height:100vh;object-fit:contain}
+</style>
 </head>
+<body>
 
-<body class="min-h-screen flex flex-col">
+<div id="error" style="display:none;padding:20px;color:red">
+❌ Video tidak ditemukan
+</div>
 
-<header class="p-4 border-b border-gray-800 text-center">
-  <a href="index.html" class="font-bold">⬅ Back</a>
-</header>
-
-<main class="flex-grow flex items-center justify-center p-4">
-  <video id="player" controls autoplay class="max-h-[90vh] w-auto rounded-xl"></video>
-</main>
+<video id="player" controls autoplay playsinline></video>
 
 <script>
-const params = new URLSearchParams(location.search);
-const file = params.get("v");
+const params = new URLSearchParams(window.location.search);
+const v = params.get("v");
 
-if(!file){
-  document.body.innerHTML="❌ Video tidak ditemukan";
-}else{
-  const url = `https://raw.githubusercontent.com/video-twimg-tv/video-twimg-tv.github.io/main/VideoTwimgTv/${file}`;
-  document.getElementById("player").src = url;
+const videos = {
+  "9bzPCM": "https://cdn.videy.co/F2cTSB8t1.mp4",
+  "wX49pj": "https://cdn.videy.co/CzVoKKGY1.mp4"
+};
+
+if (!v || !videos[v]) {
+  document.getElementById("error").style.display = "block";
+} else {
+  document.getElementById("player").src = videos[v];
 }
 </script>
 
