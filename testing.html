@@ -2,73 +2,52 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Video Twimg TV</title>
+<title>TikTikXx - Video Viral</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{
-  margin:0;
-  font-family:system-ui;
-  background:#0b0b10;
-  color:#fff;
-}
-h1{ text-align:center; padding:20px 0 }
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-  gap:14px;
-  padding:14px;
-}
-.card{
-  background:#111;
-  border-radius:12px;
-  overflow:hidden;
-  cursor:pointer;
-}
-video{
-  width:100%;
-  display:block;
-}
-.name{
-  padding:8px;
-  font-size:13px;
-  text-align:center;
-}
-</style>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000;color:white}</style>
 </head>
-<body>
 
-<h1>🎬 Video Twimg TV</h1>
-<div id="grid" class="grid"></div>
+<body class="min-h-screen flex flex-col">
+
+<header class="sticky top-0 z-50 bg-black/90 border-b border-gray-800 p-4 text-center">
+  <h1 class="font-black text-2xl">TikTikXx.COM</h1>
+</header>
+
+<main class="flex-grow p-2">
+  <div id="grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+    Loading...
+  </div>
+</main>
 
 <script>
 const USER = "video-twimg-tv";
-const REPO = "video-twimg-tv";   // ganti
-const FOLDER = "https://github.com/video-twimg-tv/TNS0DZpO1.mp4";        // folder video
+const REPO = "video-twimg-tv.github.io";
+const FOLDER = "VideoTwimgTv";
 
-const apiURL = `https://api.github.com/repos/${USER}/${REPO}/contents/${FOLDER}`;
+const api = `https://api.github.com/repos/${USER}/${REPO}/contents/${FOLDER}`;
 const grid = document.getElementById("grid");
 
-fetch(apiURL)
-  .then(res => res.json())
-  .then(files => {
-    files
-      .filter(f => f.name.match(/\.(mp4|webm)$/i))
-      .forEach(file => {
-        const raw = file.download_url;
+fetch(api)
+.then(r=>r.json())
+.then(files=>{
+  grid.innerHTML = "";
+  files
+    .filter(f=>f.name.match(/\.(mp4|webm)$/i))
+    .forEach(f=>{
+      const id = encodeURIComponent(f.name);
+      grid.innerHTML += `
+      <a href="watch.html?v=${id}" class="relative aspect-[9/16] bg-gray-900 overflow-hidden rounded-lg group">
+        <video src="${f.download_url}#t=1"
+          class="w-full h-full object-cover opacity-80 group-hover:opacity-100"
+          muted preload="metadata"></video>
 
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <video src="${raw}" controls preload="metadata"></video>
-          <div class="name">${file.name}</div>
-        `;
-        grid.appendChild(card);
-      });
-  })
-  .catch(err => {
-    grid.innerHTML = "❌ Gagal load video";
-    console.error(err);
-  });
+        <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black p-2 text-xs font-bold">
+          ${f.name}
+        </div>
+      </a>`;
+    });
+});
 </script>
 
 </body>
