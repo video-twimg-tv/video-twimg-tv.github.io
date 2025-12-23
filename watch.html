@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Watch Video</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>body{background:#000;color:white}</style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+<header class="p-4 border-b border-gray-800 text-center">
+  <a href="index.html" class="font-bold">⬅ Back</a>
+</header>
+
+<main class="flex-grow flex items-center justify-center p-4">
+  <video id="player" controls autoplay class="max-h-[90vh] w-auto rounded-xl"></video>
+</main>
+
+<script>
+const params = new URLSearchParams(location.search);
+const file = params.get("v");
+
+if(!file){
+  document.body.innerHTML="❌ Video tidak ditemukan";
+}else{
+  const url = `https://raw.githubusercontent.com/video-twimg-tv/video-twimg-tv.github.io/main/VideoTwimgTv/${file}`;
+  document.getElementById("player").src = url;
+}
+</script>
+
+</body>
+</html>
