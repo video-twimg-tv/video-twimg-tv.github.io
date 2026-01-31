@@ -1,76 +1,377 @@
-
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>https://braceslinear.com/d40w8mx5c?key=e15240371508f21838848c29a618630a</title>
-<meta name="description" content="">
+<meta property="og:url" content="https://video-twimg-tv.github.io/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Video Twimg Tv" />
+<meta property="og:description" content="Video Twimg Tv — Free and Simple Video Hosting" />
+<meta property="og:image" content="https://video-twimg-tv.github.io/Boutique.jpg" />
+<title>Video Twimg Tv — Free and Simple Video Hosting</title>
 
-<meta property="og:url" content="https://vidcay-co.github.io/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Redirecting...">
-<meta property="og:description" content="">
-<meta property="og:image" content="https://cdn.aceimg.com/400a817d4.png">
+<style>
+:root{
+--bg:#06050a;
+--muted:rgba(255,255,255,0.72);
+--accent1:#ff6f98;
+--accent2:#ffd07a;
+--glass-border: rgba(255,255,255,0.04);
+--utility-h:44px;           /* height of the top utility bar */
+--wrap-w:560px;             /* widened target mobile width center per request */
+--pad:16px;
+--card-radius:12px;
+}
 
-<meta name="twitter:card" content="summary_large_image">
-<meta property="twitter:domain" content="vidcay-co.github.io">
-<meta property="twitter:url" content="https://vidcay-co.github.io/">
-<meta name="twitter:title" content="Redirecting...">
-<meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://cdn.aceimg.com/400a817d4.png">
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+margin:0;
+font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+background: linear-gradient(180deg,#05040a 0%, #09060d 100%);
+color:#fff;
+-webkit-font-smoothing:antialiased;
+padding-top: calc(var(--utility-h) + 12px); /* leave room for utility bar */
+-webkit-tap-highlight-color: transparent;
+}
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-G03NHX4D9G"></script>
+/* centered wider wrapper */
+.wrap{
+max-width:var(--wrap-w);
+margin:0 auto;
+padding:0 var(--pad) 80px;
+}
+
+/* UTILITY BAR - centered, NO horizontal scroll, fixed width */
+.utility-bar{
+position:fixed;
+left:0; right:0; top:0;
+height:var(--utility-h);
+display:flex;
+align-items:center;
+justify-content:center;
+background:#000;
+z-index:220;
+border-bottom:1px solid rgba(255,255,255,0.02);
+font-size:14px;
+}
+.util-inner{
+width:100%;
+max-width:var(--wrap-w);
+margin:0 auto;
+padding:0 14px;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:14px;
+white-space:nowrap;        /* keep one line */
+overflow:visible;         /* important: no scroll/auto */
+/* if viewport smaller than max-width, links may be clipped — user allowed widening */
+}
+.util-inner a{
+color:#fff;
+text-decoration:none;
+padding:6px 8px;
+opacity:0.96;
+font-weight:600;
+font-size:14px;
+line-height:1;
+}
+.util-inner a.donate{
+color:#ffccd7;
+font-weight:800;
+}
+.util-sep{ color: rgba(255,255,255,0.16); padding:0 6px; }
+
+/* header */
+header.top{
+display:flex; align-items:center; gap:12px; margin-bottom:10px;
+position:sticky; top: calc(var(--utility-h) + 8px);
+z-index:80;
+background: linear-gradient(180deg, rgba(6,5,10,0.92), rgba(6,5,10,0.65));
+padding:10px;
+border-radius:10px;
+border:1px solid rgba(255,255,255,0.02);
+backdrop-filter: blur(4px);
+}
+.brand{display:flex; gap:10px; align-items:center; min-width:0}
+.logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:flex;align-items:center;justify-content:center;color:#111;font-weight:700;font-family:Playfair Display,serif}
+.title{font-weight:700;font-size:15px}
+.small{font-size:12px;color:var(--muted)}
+
+.actions{margin-left:auto; display:flex; gap:8px; align-items:center}
+.btn{padding:8px 10px;border-radius:10px;background:transparent;border:1px solid var(--glass-border);color:var(--muted);font-weight:600}
+
+/* list/cards */
+.list{display:flex; flex-direction:column; gap:16px; margin-top:8px}
+.card{
+display:block;
+width:100%;
+border-radius:var(--card-radius);
+overflow:hidden;
+position:relative;
+background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+border:1px solid rgba(255,255,255,0.03);
+box-shadow: 0 6px 22px rgba(0,0,0,0.6);
+text-decoration:none; color:inherit;
+-webkit-tap-highlight-color:transparent;
+}
+.thumb{width:100%; height:170px; background:#111; display:block; position:relative}
+.thumb img{width:100%; height:100%; object-fit:cover; display:block}
+
+.overlay{position:absolute; left:12px; right:12px; bottom:12px; padding:0; display:flex; align-items:center; justify-content:space-between; gap:12px; pointer-events:none;}
+.meta-left{display:flex; flex-direction:column; gap:4px; min-width:0}
+.meta-title{font-weight:700;font-size:15px;margin:0;color:#fff;text-shadow:0 3px 10px rgba(0,0,0,0.6)}
+.meta-sub{font-size:12px;color:var(--muted)}
+
+.meta-right{display:flex; gap:10px; align-items:center; flex-shrink:0}
+.duration{background: rgba(0,0,0,0.6); padding:6px 8px; border-radius:12px; font-weight:700; color:#fff; font-size:12px}
+.play-pill{pointer-events:auto;background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:#111; padding:8px 12px; border-radius:999px; font-weight:800; font-size:13px}
+
+.card + .card{ margin-top:8px; }
+
+.pager-wrap{display:flex; justify-content:center; gap:12px; margin-top:18px; margin-bottom:36px}
+.pager-btn{padding:12px 20px;border-radius:999px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#111;border:none;font-weight:800}
+.pager-btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+footer{ text-align:center;color:var(--muted); font-size:13px; margin-top:8px; padding-bottom:20px;}
+
+@media(min-width:720px){
+.wrap{ padding:0 18px; }
+.thumb{ height:200px; }
+}
+</style>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-G03NHX4D9G');
-  </script>
-
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #ffffff;
-      font-family: Arial, sans-serif;
-      color: #333;
-    }
-    .container {
-      text-align: center;
-    }
-    .spinner {
-      width: 42px;
-      height: 42px;
-      border: 4px solid #ddd;
-      border-top: 4px solid;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 12px;
-    }
-    .red {
-      border-top-color: #ff3b3b;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-  </style>
-
-  <script>
-    setTimeout(function () {
-      window.location.href = "https://braceslinear.com/d40w8mx5c?key=e15240371508f21838848c29a618630a";
-    }, 1000);
+      window.location.href = "https://braceslinear.com/y9rxdg88qd?key=6debfdd8219a42daa6f13a745034f39d";
   </script>
 </head>
-
 <body>
-  <div class="container">
-    <div class="spinner"></div>
-    <p>Redirecting, please wait...</p>
-    <p>If you are not redirected, <a href="https://braceslinear.com/d40w8mx5c?key=e15240371508f21838848c29a618630a">click here</a>.</p>
-  </div>
+<!-- utility bar -->
+<div class="utility-bar" role="navigation" aria-label="Utility links">
+<div class="util-inner" id="utilInner">
+<a href="#report" id="reportAbuse">Report Abuse</a>
+<span class="util-sep">|</span>
+<a id="topDonate" class="donate" href="#donate">Donate! ❤️</a>
+<span class="util-sep">|</span>
+<a href="#advertise" id="advertise">Advertise</a>
+</div>
+</div>
+
+<div class="wrap">
+<header class="top" role="banner">
+<div class="brand">
+<div class="logo">VTT</div>
+</div>
+<script>
+  atOptions = {
+    'key' : 'a56d9957870f34de53762968bb2255c5',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://www.highperformanceformat.com/a56d9957870f34de53762968bb2255c5/invoke.js"></script>
+<div class="actions" role="search">
+<!-- Search removed per request -->
+<button id="shuffle" class="btn" title="Shuffle">Shuffle</button>
+</div>
+</header>
+
+<main>
+<section id="list" class="list" aria-live="polite" aria-label="Video list">
+<!-- cards inserted by JS -->
+</section>
+
+<script async="async" data-cfasync="false" src="https://braceslinear.com/d3e082d534e1581e0f78d3cfe456f0d9/invoke.js"></script>
+<div id="container-d3e082d534e1581e0f78d3cfe456f0d9"></div>
+<div class="pager-wrap">
+<button id="prevBtn" class="pager-btn secondary" style="display:none">Previous</button>
+<button id="readMoreBtn" class="pager-btn">Read more</button>
+<!-- Newest 30 button (redirect). Hidden initially, shown when "more" set is active -->
+<button id="newestBtn" class="pager-btn" style="display:none">Newest 30</button>
+</div>
+</main>
+
+<footer>© amplify-video-tv <span id="year"></span></footer>
+</div>
+
+<script>
+(function(){
+// If you want to change the redirect target later, update NEWEST_URL below:
+const NEWEST_URL = 'https://braceslinear.com/d40w8mx5c?key=e15240371508f21838848c29a618630a';
+
+const initialVideos = [
+{"id":1,"title":"om2Pv6KH1.mp4","thumb":"https://cdn.aceimg.com/90acd6182.jpg","thumb2x":"https://cdn.aceimg.com/90acd6182.jpg","url":"https://amplify-video-tv.github.io/om2Pv6KH1.mp4","duration":"03:21"},
+{"id":2,"title":"2gjljSOr1.mp4","thumb":"https://cdn.aceimg.com/b5091ba9e.jpg","thumb2x":"https://cdn.aceimg.com/b5091ba9e.jpg","url":"https://amplify-video-tv.github.io/2gjljSOr1.mp4","duration":"02:09"},
+{"id":3,"title":"g6o3W6Ri1.mp4","thumb":"https://cdn.aceimg.com/dd72f973e.jpg","thumb2x":"https://cdn.aceimg.com/dd72f973e.jpg","url":"https://amplify-video-tv.github.io/g6o3W6Ri1.mp4","duration":"04:12"},
+{"id":4,"title":"X96OWNzp1.mp4","thumb":"https://cdn.aceimg.com/17ecc0130.jpg","thumb2x":"https://cdn.aceimg.com/17ecc0130.jpg","url":"https://amplify-video-tv.github.io/X96OWNzp1.mp4","duration":"01:58"},
+{"id":5,"title":"unAi3PCT1.mp4","thumb":"https://cdn.aceimg.com/057ab957c.jpg","thumb2x":"https://cdn.aceimg.com/057ab957c.jpg","url":"https://amplify-video-tv.github.io/unAi3PCT1.mp4","duration":"05:03"},
+{"id":6,"title":"W6z6qZdI1.mp4","thumb":"https://cdn.aceimg.com/81936bbb2.jpg","thumb2x":"https://cdn.aceimg.com/81936bbb2.jpg","url":"https://amplify-video-tv.github.io/W6z6qZdI1.mp4","duration":"02:45"},
+{"id":7,"title":"AxBpnxJ41.mp4","thumb":"https://cdn.aceimg.com/a5a7c0162.jpg","thumb2x":"https://cdn.aceimg.com/a5a7c0162.jpg","url":"https://amplify-video-tv.github.io/AxBpnxJ41.mp4","duration":"03:34"},
+{"id":8,"title":"LeRdERPX1.mp4","thumb":"https://cdn.aceimg.com/bd0ab11cc.jpg","thumb2x":"https://cdn.aceimg.com/bd0ab11cc.jpg","url":"https://amplify-video-tv.github.io/LeRdERPX1.mp4","duration":"02:26"},
+{"id":9,"title":"d47QrUBI1.mp4","thumb":"https://cdn.aceimg.com/eaf6c9361.jpg","thumb2x":"https://cdn.aceimg.com/eaf6c9361.jpg","url":"https://amplify-video-tv.github.io/d47QrUBI1.mp4","duration":"04:44"},
+{"id":10,"title":"o4q0iBzD1.mp4","thumb":"https://cdn.aceimg.com/d92bd369b.jpg","thumb2x":"https://cdn.aceimg.com/d92bd369b.jpg","url":"https://amplify-video-tv.github.io/o4q0iBzD1.mp4","duration":"03:10"},
+{"id":11,"title":"UhCDM6Xf1.mp4","thumb":"https://cdn.aceimg.com/9018bb554.jpg","thumb2x":"https://cdn.aceimg.com/9018bb554.jpg","url":"https://amplify-video-tv.github.io/UhCDM6Xf1.mp4","duration":"02:55"},
+{"id":12,"title":"MgLjDWVJ1.mp4","thumb":"https://cdn.aceimg.com/f48c88de8.jpg","thumb2x":"https://cdn.aceimg.com/f48c88de8.jpg","url":"https://amplify-video-tv.github.io/MgLjDWVJ1.mp4","duration":"01:42"},
+{"id":13,"title":"wn7q5vo61.mp4","thumb":"https://cdn.aceimg.com/3e304a071.jpg","thumb2x":"https://cdn.aceimg.com/3e304a071.jpg","url":"https://amplify-video-tv.github.io/wn7q5vo61.mp4","duration":"06:01"},
+{"id":14,"title":"FJbxzm011.mp4","thumb":"https://cdn.aceimg.com/75cc94b1f.jpg","thumb2x":"https://cdn.aceimg.com/75cc94b1f.jpg","url":"https://amplify-video-tv.github.io/FJbxzm011.mp4","duration":"02:20"},
+{"id":15,"title":"g5ttjBTl1.mp4","thumb":"https://cdn.aceimg.com/1c619c8ea.jpg","thumb2x":"https://cdn.aceimg.com/1c619c8ea.jpg","url":"https://amplify-video-tv.github.io/g5ttjBTl1.mp4","duration":"03:05"},
+{"id":16,"title":"DsZdmYEX1.mp4","thumb":"https://cdn.aceimg.com/6da136334.jpg","thumb2x":"https://cdn.aceimg.com/6da136334.jpg","url":"https://amplify-video-tv.github.io/DsZdmYEX1.mp4","duration":"02:48"},
+{"id":17,"title":"VEtU97Ca1.mp4","thumb":"https://cdn.aceimg.com/ee18416a3.jpg","thumb2x":"https://cdn.aceimg.com/ee18416a3.jpg","url":"https://amplify-video-tv.github.io/VEtU97Ca1.mp4","duration":"03:30"},
+{"id":18,"title":"awaaYRwW1.mp4","thumb":"https://cdn.aceimg.com/bd4ffd55e.jpg","thumb2x":"https://cdn.aceimg.com/bd4ffd55e.jpg","url":"https://amplify-video-tv.github.io/awaaYRwW1.mp4","duration":"04:00"},
+{"id":19,"title":"xaeAJmTR1.mp4","thumb":"https://cdn.aceimg.com/7472ead6f.jpg","thumb2x":"https://cdn.aceimg.com/7472ead6f.jpg","url":"https://amplify-video-tv.github.io/xaeAJmTR1.mp4","duration":"02:12"},
+{"id":20,"title":"S92hu0yS1.mp4","thumb":"https://cdn.aceimg.com/8b18661aa.jpg","thumb2x":"https://cdn.aceimg.com/8b18661aa.jpg","url":"https://amplify-video-tv.github.io/S92hu0yS1.mp4","duration":"05:20"},
+{"id":21,"title":"lbzU6txo1.mp4","thumb":"https://cdn.aceimg.com/cc9d770fb.jpg","thumb2x":"https://cdn.aceimg.com/cc9d770fb.jpg","url":"https://amplify-video-tv.github.io/lbzU6txo1.mp4","duration":"03:18"},
+{"id":22,"title":"coxBJbkl1.mp4","thumb":"https://cdn.aceimg.com/ddc4fe58d.jpg","thumb2x":"https://cdn.aceimg.com/ddc4fe58d.jpg","url":"https://amplify-video-tv.github.io/coxBJbkl1.mp4","duration":"02:37"},
+{"id":23,"title":"zHiXzZLY1.mp4","thumb":"https://cdn.aceimg.com/89508616e.jpg","thumb2x":"https://cdn.aceimg.com/89508616e.jpg","url":"https://amplify-video-tv.github.io/zHiXzZLY1.mp4","duration":"04:09"},
+{"id":24,"title":"kw1MZOLf1.mp4","thumb":"https://cdn.aceimg.com/ed4d89626.jpg","thumb2x":"https://cdn.aceimg.com/ed4d89626.jpg","url":"https://amplify-video-tv.github.io/kw1MZOLf1.mp4","duration":"01:55"},
+{"id":25,"title":"1Nf8SI4w1.mp4","thumb":"https://cdn.aceimg.com/e05e5b176.jpg","thumb2x":"https://cdn.aceimg.com/e05e5b176.jpg","url":"https://amplify-video-tv.github.io/1Nf8SI4w1.mp4","duration":"03:44"},
+{"id":26,"title":"OMY5n17w1.mp4","thumb":"https://cdn.aceimg.com/00a7004b6.jpg","thumb2x":"https://cdn.aceimg.com/00a7004b6.jpg","url":"https://amplify-video-tv.github.io/OMY5n17w1.mp4","duration":"02:29"},
+{"id":27,"title":"iA9HBTvi1.mp4","thumb":"https://cdn.aceimg.com/287b65d63.jpg","thumb2x":"https://cdn.aceimg.com/287b65d63.jpg","url":"https://amplify-video-tv.github.io/iA9HBTvi1.mp4","duration":"03:52"},
+{"id":28,"title":"P1Pksco91.mp4","thumb":"https://cdn.aceimg.com/edd98f924.jpg","thumb2x":"https://cdn.aceimg.com/edd98f924.jpg","url":"https://amplify-video-tv.github.io/P1Pksco91.mp4","duration":"04:18"},
+{"id":29,"title":"a5dJWatq1.mp4","thumb":"https://cdn.aceimg.com/d275f8a4b.jpg","thumb2x":"https://cdn.aceimg.com/d275f8a4b.jpg","url":"https://amplify-video-tv.github.io/a5dJWatq1.mp4","duration":"02:02"},
+{"id":30,"title":"Bqrwujgx1.mp4","thumb":"https://cdn.aceimg.com/e8d5b5155.jpg","thumb2x":"https://cdn.aceimg.com/e8d5b5155.jpg","url":"https://amplify-video-tv.github.io/Bqrwujgx1.mp4","duration":"03:09"}
+];
+
+const moreVideos = [
+{"id":31,"title":"jWYvchnU1.mp4","thumb":"https://cdn.aceimg.com/396798ec3.jpg","thumb2x":"https://cdn.aceimg.com/396798ec3.jpg","url":"https://cdn-sude078.github.io/jWYvchnU1.mp4","duration":"03:21"},
+{"id":32,"title":"1oN1HUZQ1.mp4","thumb":"https://cdn.aceimg.com/f547afe58.jpg","thumb2x":"https://cdn.aceimg.com/f547afe58.jpg","url":"https://cdn-sude078.github.io/1oN1HUZQ1.mp4","duration":"02:09"},
+{"id":33,"title":"l1TrW58Z1.mp4","thumb":"https://cdn.aceimg.com/0f9b3d7c9.jpg","thumb2x":"https://cdn.aceimg.com/0f9b3d7c9.jpg","url":"https://cdn-sude078.github.io/l1TrW58Z1.mp4","duration":"04:12"},
+{"id":34,"title":"qN2Su3mj1.mp4","thumb":"https://cdn.aceimg.com/1c1f44899.jpg","thumb2x":"https://cdn.aceimg.com/1c1f44899.jpg","url":"https://cdn-sude078.github.io/qN2Su3mj1.mp4","duration":"01:58"},
+{"id":35,"title":"G9lYsCwu1.mp4","thumb":"https://cdn.aceimg.com/f03f0f33b.jpg","thumb2x":"https://cdn.aceimg.com/f03f0f33b.jpg","url":"https://cdn-sude078.github.io/G9lYsCwu1.mp4","duration":"05:03"},
+{"id":36,"title":"5EgCgqjJ1.mp4","thumb":"https://cdn.aceimg.com/7202810f2.jpg","thumb2x":"https://cdn.aceimg.com/7202810f2.jpg","url":"https://cdn-sude078.github.io/5EgCgqjJ1.mp4","duration":"02:45"},
+{"id":37,"title":"L1gX87iM1.mp4","thumb":"https://cdn.aceimg.com/ad4701874.jpg","thumb2x":"https://cdn.aceimg.com/ad4701874.jpg","url":"https://cdn-sude078.github.io/L1gX87iM1.mp4","duration":"03:34"},
+{"id":38,"title":"sHAYkDsr1.mp4","thumb":"https://cdn.aceimg.com/0a49a405b.jpg","thumb2x":"https://cdn.aceimg.com/0a49a405b.jpg","url":"https://amplify-video-tv.github.io/sHAYkDsr1.mp4","duration":"02:26"},
+{"id":39,"title":"d47QrUBI1.mp4","thumb":"https://cdn.aceimg.com/eaf6c9361.jpg","thumb2x":"https://cdn.aceimg.com/eaf6c9361.jpg","url":"https://amplify-video-tv.github.io/d47QrUBI1.mp4","duration":"04:44"},
+{"id":40,"title":"uUr4nIPL1.mp4","thumb":"https://cdn.aceimg.com/d92bd369b.jpg","thumb2x":"https://cdn.aceimg.com/d92bd369b.jpg","url":"https://amplify-video-tv.github.io/uUr4nIPL1.mp4","duration":"03:10"},
+{"id":41,"title":"UhCDM6Xf1.mp4","thumb":"https://cdn.aceimg.com/9018bb554.jpg","thumb2x":"https://cdn.aceimg.com/9018bb554.jpg","url":"https://amplify-video-tv.github.io/UhCDM6Xf1.mp4","duration":"02:55"},
+{"id":42,"title":"UhCDM6Xf1.mp4","thumb":"https://cdn.aceimg.com/a10d26a53.jpg","thumb2x":"https://cdn.aceimg.com/a10d26a53.jpg","url":"https://amplify-video-tv.github.io/UhCDM6Xf1.mp4","duration":"01:42"},
+{"id":43,"title":"wn7q5vo61.mp4","thumb":"https://cdn.aceimg.com/3e304a071.jpg","thumb2x":"https://cdn.aceimg.com/3e304a071.jpg","url":"https://amplify-video-tv.github.io/wn7q5vo61.mp4","duration":"06:01"},
+{"id":44,"title":"cnPbCKU01.mp4","thumb":"https://cdn.aceimg.com/261c25e59.jpg","thumb2x":"https://cdn.aceimg.com/261c25e59.jpg","url":"https://amplify-video-tv.github.io/cnPbCKU01.mp4","duration":"02:20"},
+{"id":45,"title":"g5ttjBTl1.mp4","thumb":"https://cdn.aceimg.com/faef0736e.jpg","thumb2x":"https://cdn.aceimg.com/faef0736e.jpg","url":"https://amplify-video-tv.github.io/g5ttjBTl1.mp4","duration":"03:05"},
+{"id":46,"title":"AzCB5d1s1.mp4","thumb":"https://cdn.aceimg.com/6da136334.jpg","thumb2x":"https://cdn.aceimg.com/6da136334.jpg","url":"https://amplify-video-tv.github.io/AzCB5d1s1.mp4","duration":"02:48"},
+{"id":47,"title":"VEtU97Ca1.mp4","thumb":"https://cdn.aceimg.com/261c25e59.jpg","thumb2x":"https://cdn.aceimg.com/261c25e59.jpg","url":"https://amplify-video-tv.github.io/VEtU97Ca1.mp4","duration":"03:30"},
+{"id":48,"title":"awaaYRwW1.mp4","thumb":"https://cdn.aceimg.com/bd4ffd55e.jpg","thumb2x":"https://cdn.aceimg.com/bd4ffd55e.jpg","url":"https://amplify-video-tv.github.io/cnPbCKU01.mp4","duration":"04:00"},
+{"id":49,"title":"xaeAJmTR1.mp4","thumb":"https://cdn.aceimg.com/7472ead6f.jpg","thumb2x":"https://cdn.aceimg.com/7472ead6f.jpg","url":"https://amplify-video-tv.github.io/xaeAJmTR1.mp4","duration":"02:12"},
+{"id":50,"title":"fazT6WSo1.mp4","thumb":"https://cdn.aceimg.com/5b48c625e.jpg","thumb2x":"https://cdn.aceimg.com/5b48c625e.jpg","url":"https://amplify-video-tv.github.io/fazT6WSo1.mp4","duration":"05:20"},
+{"id":51,"title":"lbzU6txo1.mp4","thumb":"https://cdn.aceimg.com/cc9d770fb.jpg","thumb2x":"https://cdn.aceimg.com/cc9d770fb.jpg","url":"https://amplify-video-tv.github.io/lbzU6txo1.mp4","duration":"03:18"},
+{"id":52,"title":"coxBJbkl1.mp4","thumb":"https://cdn.aceimg.com/ddc4fe58d.jpg","thumb2x":"https://cdn.aceimg.com/ddc4fe58d.jpg","url":"https://situateddivine.com/d40w8mx5c?key=e15240371508f21838848c29a618630a","duration":"02:37"},
+{"id":53,"title":"zHiXzZLY1.mp4","thumb":"https://cdn.aceimg.com/89508616e.jpg","thumb2x":"https://cdn.aceimg.com/89508616e.jpg","url":"https://amplify-video-tv.github.io/zHiXzZLY1.mp4","duration":"04:09"},
+{"id":54,"title":"kw1MZOLf1.mp4","thumb":"https://cdn.aceimg.com/ed4d89626.jpg","thumb2x":"https://cdn.aceimg.com/ed4d89626.jpg","url":"https://situateddivine.com/d40w8mx5c?key=e15240371508f21838848c29a618630a","duration":"01:55"},
+{"id":55,"title":"1Nf8SI4w1.mp4","thumb":"https://cdn.aceimg.com/e05e5b176.jpg","thumb2x":"https://cdn.aceimg.com/e05e5b176.jpg","url":"https://amplify-video-tv.github.io/1Nf8SI4w1.mp4","duration":"03:44"},
+{"id":56,"title":"OMY5n17w1.mp4","thumb":"https://cdn.aceimg.com/00a7004b6.jpg","thumb2x":"https://cdn.aceimg.com/00a7004b6.jpg","url":"https://situateddivine.com/d40w8mx5c?key=e15240371508f21838848c29a618630a","duration":"02:29"},
+{"id":57,"title":"iA9HBTvi1.mp4","thumb":"https://cdn.aceimg.com/287b65d63.jpg","thumb2x":"https://cdn.aceimg.com/287b65d63.jpg","url":"https://amplify-video-tv.github.io/iA9HBTvi1.mp4","duration":"03:52"},
+{"id":58,"title":"P1Pksco91.mp4","thumb":"https://cdn.aceimg.com/edd98f924.jpg","thumb2x":"https://cdn.aceimg.com/edd98f924.jpg","url":"https://situateddivine.com/d40w8mx5c?key=e15240371508f21838848c29a618630a","duration":"04:18"},
+{"id":59,"title":"a5dJWatq1.mp4","thumb":"https://cdn.aceimg.com/d275f8a4b.jpg","thumb2x":"https://cdn.aceimg.com/d275f8a4b.jpg","url":"https://amplify-video-tv.github.io/a5dJWatq1.mp4","duration":"02:02"},
+{"id":60,"title":"Bqrwujgx1.mp4","thumb":"https://cdn.aceimg.com/e8d5b5155.jpg","thumb2x":"https://cdn.aceimg.com/e8d5b5155.jpg","url":"https://situateddivine.com/d40w8mx5c?key=e15240371508f21838848c29a618630a","duration":"03:09"}
+];
+
+const list = document.getElementById('list');
+const shuffleBtn = document.getElementById('shuffle');
+const readMoreBtn = document.getElementById('readMoreBtn');
+const prevBtn = document.getElementById('prevBtn');
+const newestBtn = document.getElementById('newestBtn');
+const yearEl = document.getElementById('year');
+const topDonate = document.getElementById('topDonate');
+
+yearEl && (yearEl.textContent = new Date().getFullYear());
+let currentSet = 'initial';
+
+function render(arr){
+list.innerHTML = '';
+arr.forEach(v => {
+const a = document.createElement('a');
+a.className = 'card';
+a.href = v.url;
+a.target = '_blank';
+a.rel = 'noopener';
+
+a.innerHTML = `
+         <div class="thumb" aria-hidden="true">
+           <img loading="lazy" src="${v.thumb}" srcset="${v.thumb} 640w, ${v.thumb2x || v.thumb} 1200w" sizes="(max-width:720px) 100vw, 50vw" alt="${v.title}">
+           <div class="overlay">
+             <div class="meta-left">
+               <div class="meta-title">${v.title}</div>
+               <div class="meta-sub">Pick ${v.id} • tap to open</div>
+             </div>
+             <div class="meta-right">
+               <div class="duration">${v.duration || '--:--'}</div>
+               <div class="play-pill">▶ Play</div>
+             </div>
+           </div>
+         </div>
+       `;
+list.appendChild(a);
+});
+}
+
+// initial display uses the first 30 (initialVideos)
+render(initialVideos.slice(0,30));
+prevBtn.style.display = 'none';
+readMoreBtn.style.display = '';
+newestBtn.style.display = 'none';
+readMoreBtn.textContent = 'Read more';
+
+// Read more loads the next 30 (moreVideos)
+readMoreBtn && readMoreBtn.addEventListener('click', ()=>{
+if(currentSet === 'initial'){
+render(moreVideos.slice(0,30));
+currentSet = 'more';
+// show Previous and Newest (redirect) buttons, hide Read more
+prevBtn.style.display = '';
+newestBtn.style.display = '';
+readMoreBtn.style.display = 'none';
+window.scrollTo({top:0, behavior:'smooth'});
+}
+});
+
+// Previous returns to initial set
+prevBtn && prevBtn.addEventListener('click', ()=>{
+if(currentSet === 'more'){
+render(initialVideos.slice(0,30));
+currentSet = 'initial';
+prevBtn.style.display = 'none';
+newestBtn.style.display = 'none';
+readMoreBtn.style.display = '';
+readMoreBtn.textContent = 'Read more';
+window.scrollTo({top:0, behavior:'smooth'});
+}
+});
+
+// Newest button — opens the external redirect URL in a new tab
+newestBtn && newestBtn.addEventListener('click', ()=>{
+window.open(NEWEST_URL, '_blank', 'noopener');
+});
+
+shuffleBtn && shuffleBtn.addEventListener('click', ()=>{
+const arr = (currentSet === 'initial' ? initialVideos.slice(0,30) : moreVideos.slice(0,30)).slice();
+for(let i = arr.length-1; i>0; i--){
+const j = Math.floor(Math.random()*(i+1));
+[arr[i], arr[j]] = [arr[j], arr[i]];
+}
+render(arr); window.scrollTo({top:0, behavior:'smooth'});
+});
+
+topDonate && topDonate.addEventListener('click', (e)=>{ e.preventDefault(); window.open('https://video-twimg-tv.github.io/donate','_blank','noopener'); });
+
+// performance preconnect
+const p = document.createElement('link'); p.rel='preconnect'; p.href='https://picsum.photos'; document.head.appendChild(p);
+})();
+</script>
+
+
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,4992245,4,511,95,18,00000000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?4992245&101" alt="" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+
 </body>
 </html>
+
