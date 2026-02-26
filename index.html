@@ -4,17 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="7d646d5435ab51c2b6b10ee3f3d61a26b5fe3ceb" content="7d646d5435ab51c2b6b10ee3f3d61a26b5fe3ceb" />
-    <title>Videy Viewer – GitHub Pages</title>
+    <title>Videy – Simple Video Viewer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f0f0f; color: white; }
         .container { max-width: 900px; margin: 0 auto; padding: 1rem; }
         video { width: 100%; max-height: 85vh; background: black; }
+        .btn-upload {
+            padding: 0.6rem 1.4rem;
+            background: #111827;
+            color: white;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+        .btn-upload:hover { background: #1f2937; }
         .btn-share {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
+            padding: 0.75rem 1.8rem;
             background: #1f2937;
             color: white;
             border-radius: 9999px;
@@ -24,15 +34,17 @@
         .btn-share:hover { background: #374151; transform: translateY(-1px); }
     </style>
 </head>
-<body class="bg-black text-white">
+<body class="bg-black text-white min-h-screen">
 
     <div class="container mx-auto py-6 px-4">
         <header class="flex justify-between items-center mb-6">
-            <h1 class="text-2xl font-bold">Videy Viewer</h1>
-            <a href="https://videy.co" target="_blank" class="text-blue-400 hover:underline">Videy.co</a>
+            <h1 class="text-3xl font-bold tracking-tight">Videy</h1>
+            <a href="https://videy.co" target="_blank" class="btn-upload">
+                Upload
+            </a>
         </header>
 
-        <div class="bg-black rounded-xl overflow-hidden shadow-2xl mb-6">
+        <div class="bg-black rounded-xl overflow-hidden shadow-2xl mb-8">
             <video
                 id="video"
                 class="w-full"
@@ -43,7 +55,7 @@
             ></video>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="flex justify-center mb-6">
             <button id="shareBtn" class="btn-share">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
@@ -54,35 +66,44 @@
             </button>
         </div>
 
-        <p class="text-center text-gray-400 mt-8 text-sm">
-            Video di-load langsung dari server asli • GitHub Pages hanya sebagai viewer
+        <p class="text-center text-gray-500 text-sm mt-4">
         </p>
     </div>
 
-    <script>
+<script>
+(function(oboo){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = oboo || {};
+s.src = "\/\/physicalrole.com\/cUDN9.6bbu2D5\/lqSWWPQ\/9hN-j\/g\/yoNTzkcNx\/NLyc0o2LOnD_IH3CNizAIoxx";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>    <script>
         const params = new URLSearchParams(location.search);
         const id = params.get("id");
 
         if (!id) {
-            document.body.innerHTML = '<div class="text-center mt-20 text-2xl">Masukkan ?id=XXXX di URL<br>Contoh: ?id=NDtJIRbb1</div>';
+            document.body.innerHTML = '<div class="text-center mt-20 text-2xl">Tambahkan ?id=XXXX di URL<br>Contoh: ?id=NDtJIRbb1</div>';
             throw new Error("ID missing");
         }
 
         const video = document.getElementById("video");
         const base = "https://cdn.videy.co/" + id;
 
-        // Coba mp4 dulu, fallback ke mov
         video.src = base + ".mp4";
         video.onerror = () => {
             if (!video.dataset.triedAlt) {
                 video.dataset.triedAlt = "1";
                 video.src = base + ".mov";
             } else {
-                video.innerHTML = '<p class="text-center p-10">Video tidak tersedia atau diblokir</p>';
+                video.innerHTML = '<p class="text-center p-10 text-gray-400">Video tidak tersedia atau gagal dimuat</p>';
             }
         };
 
-        // Share button
+        // Share button functionality
         document.getElementById("shareBtn").onclick = () => {
             const url = location.href;
             if (navigator.share) {
@@ -92,17 +113,27 @@
                 }).catch(() => {});
             } else if (navigator.clipboard) {
                 navigator.clipboard.writeText(url).then(() => {
-                    alert("Link disalin ke clipboard!");
+                    alert("Link berhasil disalin!");
                 }).catch(() => {
-                    prompt("Copy link ini:", url);
+                    prompt("Salin link ini:", url);
                 });
             } else {
-                prompt("Copy link ini:", url);
+                prompt("Salin link ini:", url);
             }
         };
 
         document.title = "Videy – " + id;
-    </script>
-
+    </script><!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,5009868,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('//s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5009868&101" alt="" border="0"></a></noscript>
+<!-- Histats.com  END  -->
 </body>
 </html>
